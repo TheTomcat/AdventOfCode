@@ -21,7 +21,7 @@ def tokenise(exp):
         output.append(int(numeric_token))
     return output
 
-def evaluate_bracketed_expression(exp):
+def evaluate_bracketed_expression(exp, ltr=True):
     i=0
     while True:
         if ")" in exp:
@@ -30,12 +30,18 @@ def evaluate_bracketed_expression(exp):
                 if exp[index] == "(":
                     i_open = index
                     break
-            exp[i_open:i_close+1] = [evaluate_simple_expression(exp[i_open+1:i_close])]
+            if ltr:
+                exp[i_open:i_close+1] = [evaluate_simple_expression_ltr(exp[i_open+1:i_close])]
+            else:
+                exp[i_open:i_close+1] = [evaluate_simple_expression_rev(exp[i_open+1:i_close])]
             i=i_open
         else:
-            return evaluate_simple_expression(exp)
+            if ltr:
+                return evaluate_simple_expression_ltr(exp)
+            else:
+                return evaluate_simple_expression_rev(exp)
     
-def evaluate_simple_expression(exp):
+def evaluate_simple_expression_ltr(exp):
     if len(exp)==1:
         return exp[0]
     if len(exp) == 0:
@@ -43,13 +49,36 @@ def evaluate_simple_expression(exp):
     if '(' in exp:
         print(exp)
         raise ValueError("Cannot parse '(' in simple expression")
-
+    
     n1 = int(exp[0])
     op = exp[1]
     n2 = int(exp[2])
     res = opl[op](n1,n2)
     exp = [res] + exp[3:]
-    return evaluate_simple_expression(exp)
+    return evaluate_simple_expression_ltr(exp)
+
+def evaluate_simple_expression_rev(exp):
+    if len(exp)==1:
+        return exp[0]
+    if len(exp) == 0:
+        return
+    if '(' in exp:
+        print(exp)
+        raise ValueError("Cannot parse '(' in simple expression")
+    if "+" in exp:
+        i = exp.index("+")
+        n1 = int(exp[i-1])
+        n2 = int(exp[i+1])
+        op = "+"
+        res = opl[op](n1,n2)
+        exp = exp[:i-1] + [res] + exp[i+2:]
+    else:
+        n1 = int(exp[0])
+        op = exp[1]
+        n2 = int(exp[2])
+        res = opl[op](n1,n2)
+        exp = [res] + exp[3:]
+    return evaluate_simple_expression_rev(exp)
 
 def add(a,b):
     return a+b
@@ -71,4 +100,15 @@ tots = []
 for exp in process(read_input(18)):
     tok = tokenise(exp)
     tots.append(evaluate_bracketed_expression(tok))
+print(sum(tots))
+
+print(evaluate_bracketed_expression(tokenise("2 * 3 + (4 * 5)"), False), 46)
+print(evaluate_bracketed_expression(tokenise("5 + (8 * 3 + 9 + 3 * 4 * 3)"), False),1445)
+print(evaluate_bracketed_expression(tokenise("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))"), False),669060)
+print(evaluate_bracketed_expression(tokenise("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2"), False),23340)
+
+tots = []
+for exp in process(read_input(18)):
+    tok = tokenise(exp)
+    tots.append(evaluate_bracketed_expression(tok, False))
 print(sum(tots))
