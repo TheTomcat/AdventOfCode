@@ -1,11 +1,26 @@
-from itertools import islice
+"""A collection of useful functions that I've had to use multiple times, 
+so I've just put them together in a single file
+
+Returns:
+    [type]: [description]
+
+Yields:
+    [type]: [description]
+"""
+
+from itertools import islice, zip_longest
 
 transpose = lambda l: list(map(list, zip(*l)))
 transpose.__doc__ = "Returns the transpose of a 2d array list-of-lists"
 
+def overlap(Amin, Amax, Bmin, Bmax):
+    "For inclusive ranges [Amin,Amax] and [Bmin, Bmax], do the ranges overlap?"
+    return Amin <= Bmax and Bmin <= Amax
+
 def window(seq, n=2):
     "Returns a sliding window (of width n) over data from the iterable"
     "   s -> (s0,s1,...s[n-1]), (s1,s2,...,sn), ...                   "
+    "Originally from python docs, removed for some reason. Now on https://stackoverflow.com/a/6822773"
     it = iter(seq)
     result = tuple(islice(it, n))
     if len(result) == n:
@@ -14,6 +29,10 @@ def window(seq, n=2):
         result = result[1:] + (elem,)
         yield result
 
+def grouper(n, iterable, fillvalue=None):
+    "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return zip_longest(fillvalue=fillvalue, *args)
 
 class SpiralIterator:
     """Returns a spiral iterator in 2 dimensions, either clockwise or counterclockwise starting in 
@@ -74,5 +93,3 @@ class SpiralIterator:
 
     def __iter__(self):
         return self
-
-

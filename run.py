@@ -40,6 +40,9 @@ def run_day(year, day):#module: str, year: int, day: int):
 def run():
     year, day = _parse_args(sys.argv[1:])
     if day is not None:
+        if day > 25:
+            console.print(f"[red]I can't run the problem for {year}-{day} because {day}>25")
+            return
         run_day(year, day)
     else:
         run_day(year, 1)
@@ -84,7 +87,7 @@ def _parse_args(args: List[str]) -> Tuple[int, int]:
     parser.add_argument('year', type=int, help='The year of the exercise')
     parser.add_argument('day', type=int, help='The day of the exercise')
     #parser.add_argument('quiet', type=int, help='Suppress errors', default=False)
-    parsed = parser.parse_args(args)
+    parsed = parser.parse_intermixed_args(args)
     return parsed.year, parsed.day#, parsed.quiet
 
 if __name__=="__main__":
