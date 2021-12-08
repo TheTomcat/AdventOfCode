@@ -3,6 +3,7 @@ from typing import List
 import requests
 
 def get_input(year: int, day: int) -> None:
+    "Reads the input from adventofcode.com and stores it to a file"    
     session = _read_session()
     data = _download_input(year, day, session)
     _save_input(data, year, day)
@@ -52,6 +53,9 @@ def read_input_by_line(year: int, day: int):
             yield line[:-1]
 
 def read_entire_input(year: int, day: int) -> List[str]:
+    """Reads the file corresponding to the problem specified. If it does not exist, attempt to download it.
+    Output is a list of strings, each one line of the file.
+    """
     problem_path = _build_problem_path(year, day)
     if not os.path.exists(problem_path):
         get_input(year, day)
