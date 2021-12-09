@@ -14,7 +14,9 @@ def generate_readme():
 
     with open(readme_file, encoding="utf8") as f:
         current_readme = f.read()
-
+    
+    completed_days = _find_completed_days()
+    
     readme = _replace_between_tags(
         current_readme,
         _create_completed_text(),
@@ -78,15 +80,26 @@ def _create_completed_text() -> str:
         text.append(f'### {year}')
 
         for day, parts in days.items():
-            part_one_star = '⭐️' if parts[1] else '–'
-            part_two_star = '⭐️' if parts[2] else '–'
-            part_one_time = f'\n  - part one: {parts[1]:.3f}ms' if part_one_star != "-" else ""
-            part_two_time = f'\n  - part two: {parts[2]:.3f}ms' if part_two_star != "-" else ""
+            part_one_star = '⭐️' if parts and parts[1] else '–'
+            part_two_star = '⭐️' if parts and parts[2] else '–'
+            part_one_time = f'\n  - part one: {parts[1]:.3f}ms' if part_one_star != "–" else ""
+            part_two_time = f'\n  - part two: {parts[2]:.3f}ms' if part_two_star != "–" else ""
             text.append(f'- day {day:02}: {part_one_star} {part_two_star}{part_one_time}{part_two_time}')
 
     text.append('')
     return '\n'.join(text)
 
+def append_new_run_times(ret1, time1, ret2, time2, day, year):
+    times = load_module_times()
+    changed=False
+    if ret1:
+        times[year][day][1] = time1
+        changed=True
+    if ret2:
+        times[year][day][2] = time2
+        changed=True
+    if changed:
+        store_module_times(times)
 
 def get_full_year_paths() -> List[str]:
     """
@@ -112,17 +125,20 @@ def get_module(year: int, day: int):
     return module
 
 def time_module(module, year, day):
-    # with nostdout():
-    #     try:
-    #         _, p1 = module.part_one(module.data)
-    #     except AttributeError:
-    #         p1=None
-    #     try:
-    #         _, p2 = module.part_two(module.data)
-    #     except AttributeError:
-    #         p2=None
-    r1, p1 = module.part_one(read_entire_input(year, day))
-    r2, p2 = module.part_two(read_entire_input(year, day))
+    with nostdout():
+        try:
+            r1, p1 = module.part_one(module.data)
+        except AttributeError:
+            p1=None
+            r1=False
+        try:
+            r2, p2 = module.part_two(module.data)
+        except AttributeError:
+            p2=None
+            r2=False
+    
+    # r1, p1 = module.part_one(read_entire_input(year, day))
+    # r2, p2 = module.part_two(read_entire_input(year, day))
     p1 = p1 if r1 else r1
     p2 = p2 if r2 else r2
     return p1, p2

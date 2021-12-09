@@ -3,6 +3,7 @@ import os
 from typing import List, Tuple
 from argparse import ArgumentParser
 from util.input_helper import read_entire_input
+from util.make_readme import append_new_run_times, _create_completed_text, generate_readme
 from util.console import console
 from config import ROOT_DIR
 
@@ -18,24 +19,25 @@ def run_day(year, day):#module: str, year: int, day: int):
         console.print(f"[red]There was no solution found for problem {day} from {year}")
         console.print(f"[yellow]Attempting to create template solution...")
         create_day(year, day)
-        # if not quiet:
-        #     i = console.input("[yellow]Would you like to create it? [Y/n] ")
-        #     if i == "Y" or i == "":
-        #         create_day(year, day)
-        #     else:
-        #         return
         return
 
     data = read_entire_input(year, day)
     try:
-        getattr(module, 'part_one')(data)
+        r1, p1 = getattr(module, 'part_one')(data)
     except AttributeError:
         pass
 
     try:
-        getattr(module, 'part_two')(data)
+        r2, p2 = getattr(module, 'part_two')(data)
     except AttributeError:
         pass
+    append_new_run_times(r1,p1,r2,p2,day,year)
+    # print(_create_completed_text())
+
+    generate_readme() 
+    # This will run the solution a second time if the solution is incomplete, which isn't a problem for short 
+    # solutions but will be a problem for ones that take a long time.
+    # I can't be bothered fixing this right now.
 
 def run():
     year, day = _parse_args(sys.argv[1:])
@@ -46,6 +48,7 @@ def run():
         run_day(year, day)
     else:
         run_day(year, 1)
+    
     
 def create_day(year, day):
     console.print(f"[yellow]  Creating the solution file for year {year} day {day}.")

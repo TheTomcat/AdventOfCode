@@ -1,5 +1,5 @@
 # Advent of Code ⭐️
-[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=84&color=yellow)]()
+[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=82&color=yellow)]()
 <!--[![codecov](https://codecov.io/gh/marcelblijleven/adventofcode/branch/master/graph/badge.svg?token=jZ2TgfyltM)](https://codecov.io/gh/marcelblijleven/adventofcode)
 [![tests](https://github.com/marcelblijleven/adventofcode/actions/workflows/tests.yaml/badge.svg)](https://github.com/marcelblijleven/adventofcode)
 [![version](https://img.shields.io/github/v/release/marcelblijleven/adventofcode.svg)](https://github.com/marcelblijleven/adventofcode/releases)
@@ -134,8 +134,6 @@ My advent of code repository. Template and structure of the repository is based 
 - day 06: ⭐️ ⭐️
   - part one: 797.184ms
   - part two: 0.092ms
-- day 07: ⭐️ ⭐️
-  - part one: 0.001ms
-  - part two: 0.002ms
+- day 07: – –
 
 <!-- end completed section -->
