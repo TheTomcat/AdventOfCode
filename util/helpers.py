@@ -3,28 +3,29 @@ import os
 import pstats
 import time
 from typing import Callable, Dict, Any
+from functools import wraps
 
 from config import RUNNING_ALL
 from util.console import console
 from util.exceptions import SolutionNotFoundException
 
 
-def _get_year_from_segment(segment: str) -> int:
-    if not segment.startswith('year_'):
-        raise ValueError(f'invalid year segment received: {segment}')
+# def _get_year_from_segment(segment: str) -> int:
+#     if not segment.startswith('year_'):
+#         raise ValueError(f'invalid year segment received: {segment}')
 
-    return int(segment[5:])
+#     return int(segment[5:])
 
 
-def get_year_from_file(file: str):
-    """
-    Pass __file__ as parameter to get the year the file is in.
+# def get_year_from_file(file: str):
+#     """
+#     Pass __file__ as parameter to get the year the file is in.
 
-    Should not be used outside of a year_* module
-    """
-    segments = os.path.dirname(os.path.realpath(file)).split(os.sep)
-    year_segment = segments[-1]
-    return _get_year_from_segment(year_segment)
+#     Should not be used outside of a year_* module
+#     """
+#     segments = os.path.dirname(os.path.realpath(file)).split(os.sep)
+#     year_segment = segments[-1]
+#     return _get_year_from_segment(year_segment)
 
 
 def _get_prefix(year: int, day: int, part: int, version: str) -> str:
@@ -46,6 +47,7 @@ def solution_timer(year: int, day: int, part: int, version: str = ''):  # noqa: 
     prefix = _get_prefix(year, day, part, version)
 
     def decorator(func: Callable):  # type: ignore
+        @wraps(func)
         def wrapper(*args, **kwargs):
             try:
                 start = time.perf_counter()
@@ -61,7 +63,7 @@ def solution_timer(year: int, day: int, part: int, version: str = ''):  # noqa: 
             except SolutionNotFoundException:
                 console.print(f'{prefix}[red]solution not found')
             else:
-                return solution
+                return solution, diff
 
         return wrapper
 
@@ -73,6 +75,7 @@ def solution_profiler(year: int, day: int, part: int, version: str = '', stats_a
     prefix = _get_prefix(year, day, part, version)
 
     def decorator(func: Callable):  # type: ignore
+        @wraps(func)
         def wrapper(*args, **kwargs):
             with cProfile.Profile() as profiler:
                 func(*args, **kwargs)
