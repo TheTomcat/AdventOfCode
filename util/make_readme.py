@@ -80,8 +80,8 @@ def _create_completed_text() -> str:
         for day, parts in days.items():
             part_one_star = '⭐️' if parts[1] else '–'
             part_two_star = '⭐️' if parts[2] else '–'
-            part_one_time = f'\n  - part one {parts[1]:.3f}ms' if part_one_star != "-" else ""
-            part_two_time = f', part two {parts[2]:.3f}ms' if part_two_star != "-" else ""
+            part_one_time = f'\n  - part one: {parts[1]:.3f}ms' if part_one_star != "-" else ""
+            part_two_time = f'\n  - part two: {parts[2]:.3f}ms' if part_two_star != "-" else ""
             text.append(f'- day {day:02}: {part_one_star} {part_two_star}{part_one_time}{part_two_time}')
 
     text.append('')
