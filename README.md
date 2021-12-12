@@ -1,17 +1,23 @@
 # Advent of Code ⭐️
-[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=82&color=yellow)]()
+[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=94&color=yellow)]()
 <!--[![codecov](https://codecov.io/gh/marcelblijleven/adventofcode/branch/master/graph/badge.svg?token=jZ2TgfyltM)](https://codecov.io/gh/marcelblijleven/adventofcode)
 [![tests](https://github.com/marcelblijleven/adventofcode/actions/workflows/tests.yaml/badge.svg)](https://github.com/marcelblijleven/adventofcode)
 [![version](https://img.shields.io/github/v/release/marcelblijleven/adventofcode.svg)](https://github.com/marcelblijleven/adventofcode/releases)
 -->
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
+<!-- Last updated -->
+Last updated 03:36 on Monday 13 December, 2021
+<!-- End last updated -->
+
 <!-- start completed section -->
 ## Completed ⭐️
+
 ### 2019
+
 - day 01: ⭐️ ⭐️
-  - part one: 0.047ms
-  - part two: 0.309ms
+  - part one: 0.045ms
+  - part two: 0.304ms
 - day 02: ⭐️ ⭐️
   - part one: 0.034ms
   - part two: 101.657ms
@@ -39,7 +45,9 @@ My advent of code repository. Template and structure of the repository is based 
 - day 10: ⭐️ ⭐️
   - part one: 76.792ms
   - part two: 78.968ms
+
 ### 2020
+
 - day 01: ⭐️ ⭐️
   - part one: 0.082ms
   - part two: 16.269ms
@@ -115,7 +123,9 @@ My advent of code repository. Template and structure of the repository is based 
 - day 25: ⭐️ ⭐️
   - part one: 4.940ms
   - part two: 0.005ms
+
 ### 2021
+
 - day 01: ⭐️ ⭐️
   - part one: 0.257ms
   - part two: 0.712ms
@@ -134,6 +144,23 @@ My advent of code repository. Template and structure of the repository is based 
 - day 06: ⭐️ ⭐️
   - part one: 797.184ms
   - part two: 0.092ms
-- day 07: – –
+- day 07: ⭐️ ⭐️
+  - part one: 125.863ms
+  - part two: 223.275ms
+- day 08: ⭐️ ⭐️
+  - part one: 2.203ms
+  - part two: 4.710ms
+- day 09: ⭐️ ⭐️
+  - part one: 16.129ms
+  - part two: 40.567ms
+- day 10: ⭐️ ⭐️
+  - part one: 0.587ms
+  - part two: 0.692ms
+- day 11: ⭐️ ⭐️
+  - part one: 11.849ms
+  - part two: 61.281ms
+- day 12: ⭐️ ⭐️
+  - part one: 70.780ms
+  - part two: 3232.923ms
 
 <!-- end completed section -->

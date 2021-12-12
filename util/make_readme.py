@@ -2,11 +2,13 @@ import os, sys
 import re
 import pickle
 import importlib.util
+import datetime
 from typing import Dict, List
 
 from config import ROOT_DIR
 from util.console import nostdout
 from util.input_helper import read_entire_input
+from util.shared import store_nested_dict
 
 def generate_readme():
     path = os.path.join(ROOT_DIR, 'README.md')
@@ -22,6 +24,13 @@ def generate_readme():
         _create_completed_text(),
         '<!-- start completed section -->',
         '<!-- end completed section -->'
+    )
+
+    readme = _replace_between_tags(
+        readme,
+        f"Last updated {datetime.datetime.now().strftime('%H:%M on %A %d %B, %Y')}",
+        '<!-- Last updated -->',
+        '<!-- End last updated -->'
     )
 
     readme = _update_stars(readme)
@@ -77,13 +86,13 @@ def _create_completed_text() -> str:
 
     text = ['## Completed ⭐️']
     for year, days in found.items():
-        text.append(f'### {year}')
+        text.append(f'\n### {year}\n')
 
         for day, parts in days.items():
-            part_one_star = '⭐️' if parts and parts[1] else '–'
-            part_two_star = '⭐️' if parts and parts[2] else '–'
-            part_one_time = f'\n  - part one: {parts[1]:.3f}ms' if part_one_star != "–" else ""
-            part_two_time = f'\n  - part two: {parts[2]:.3f}ms' if part_two_star != "–" else ""
+            part_one_star = '⭐️' if parts and parts[1] else ' - '
+            part_two_star = '⭐️' if parts and parts[2] else ' - '
+            part_one_time = f'\n  - part one: {parts[1]:.3f}ms' if part_one_star != " - " else ""
+            part_two_time = f'\n  - part two: {parts[2]:.3f}ms' if part_two_star != " - " else ""
             text.append(f'- day {day:02}: {part_one_star} {part_two_star}{part_one_time}{part_two_time}')
 
     text.append('')
@@ -93,10 +102,10 @@ def append_new_run_times(ret1, time1, ret2, time2, day, year):
     times = load_module_times()
     changed=False
     if ret1:
-        times[year][day][1] = time1
+        store_nested_dict(times, time1, year, day, 1)
         changed=True
     if ret2:
-        times[year][day][2] = time2
+        store_nested_dict(times, time2, year, day, 2)
         changed=True
     if changed:
         store_module_times(times)

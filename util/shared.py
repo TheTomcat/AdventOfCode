@@ -13,6 +13,17 @@ from itertools import islice, zip_longest
 transpose = lambda l: list(map(list, zip(*l)))
 transpose.__doc__ = "Returns the transpose of a 2d array list-of-lists"
 
+def store_nested_dict(dictionary, value, *keys):
+    val = dictionary
+    for key in keys[:-1]:
+        try:
+            val = val[key]
+        except KeyError as e:
+            val[key] = {}
+            val = val[key]
+    val[keys[-1]] = value
+    return dictionary
+
 def overlap(Amin, Amax, Bmin, Bmax):
     "For inclusive ranges [Amin,Amax] and [Bmin, Bmax], do the ranges overlap?"
     return Amin <= Bmax and Bmin <= Amax
