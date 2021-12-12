@@ -7,44 +7,50 @@
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
 <!-- Last updated -->
-Last updated 03:36 on Monday 13 December, 2021
+Last updated 03:39 on Monday 13 December, 2021
 <!-- End last updated -->
 
 <!-- start completed section -->
 ## Completed ⭐️
 
-### 2019
+### 2021
 
 - day 01: ⭐️ ⭐️
-  - part one: 0.045ms
-  - part two: 0.304ms
+  - part one: 0.257ms
+  - part two: 0.712ms
 - day 02: ⭐️ ⭐️
-  - part one: 0.034ms
-  - part two: 101.657ms
+  - part one: 0.826ms
+  - part two: 0.423ms
 - day 03: ⭐️ ⭐️
-  - part one: 55.733ms
-  - part two: 595.138ms
+  - part one: 1.168ms
+  - part two: 3.991ms
 - day 04: ⭐️ ⭐️
-  - part one: 3.375ms
-  - part two: 4.187ms
+  - part one: 19.346ms
+  - part two: 47.669ms
 - day 05: ⭐️ ⭐️
-  - part one: 0.293ms
-  - part two: 0.460ms
+  - part one: 39.799ms
+  - part two: 116.839ms
 - day 06: ⭐️ ⭐️
-  - part one: 1.625ms
-  - part two: 0.900ms
+  - part one: 797.184ms
+  - part two: 0.092ms
 - day 07: ⭐️ ⭐️
-  - part one: 41.034ms
-  - part two: 55.750ms
+  - part one: 125.863ms
+  - part two: 223.275ms
 - day 08: ⭐️ ⭐️
-  - part one: 0.839ms
-  - part two: 0.774ms
+  - part one: 2.203ms
+  - part two: 4.710ms
 - day 09: ⭐️ ⭐️
-  - part one: 0.444ms
-  - part two: 451.102ms
+  - part one: 16.129ms
+  - part two: 40.567ms
 - day 10: ⭐️ ⭐️
-  - part one: 76.792ms
-  - part two: 78.968ms
+  - part one: 0.587ms
+  - part two: 0.692ms
+- day 11: ⭐️ ⭐️
+  - part one: 11.849ms
+  - part two: 61.281ms
+- day 12: ⭐️ ⭐️
+  - part one: 71.352ms
+  - part two: 3142.427ms
 
 ### 2020
 
@@ -124,43 +130,37 @@ Last updated 03:36 on Monday 13 December, 2021
   - part one: 4.940ms
   - part two: 0.005ms
 
-### 2021
+### 2019
 
 - day 01: ⭐️ ⭐️
-  - part one: 0.257ms
-  - part two: 0.712ms
+  - part one: 0.045ms
+  - part two: 0.304ms
 - day 02: ⭐️ ⭐️
-  - part one: 0.826ms
-  - part two: 0.423ms
+  - part one: 0.034ms
+  - part two: 101.657ms
 - day 03: ⭐️ ⭐️
-  - part one: 1.168ms
-  - part two: 3.991ms
+  - part one: 55.733ms
+  - part two: 595.138ms
 - day 04: ⭐️ ⭐️
-  - part one: 19.346ms
-  - part two: 47.669ms
+  - part one: 3.375ms
+  - part two: 4.187ms
 - day 05: ⭐️ ⭐️
-  - part one: 39.799ms
-  - part two: 116.839ms
+  - part one: 0.293ms
+  - part two: 0.460ms
 - day 06: ⭐️ ⭐️
-  - part one: 797.184ms
-  - part two: 0.092ms
+  - part one: 1.625ms
+  - part two: 0.900ms
 - day 07: ⭐️ ⭐️
-  - part one: 125.863ms
-  - part two: 223.275ms
+  - part one: 41.034ms
+  - part two: 55.750ms
 - day 08: ⭐️ ⭐️
-  - part one: 2.203ms
-  - part two: 4.710ms
+  - part one: 0.839ms
+  - part two: 0.774ms
 - day 09: ⭐️ ⭐️
-  - part one: 16.129ms
-  - part two: 40.567ms
+  - part one: 0.444ms
+  - part two: 451.102ms
 - day 10: ⭐️ ⭐️
-  - part one: 0.587ms
-  - part two: 0.692ms
-- day 11: ⭐️ ⭐️
-  - part one: 11.849ms
-  - part two: 61.281ms
-- day 12: ⭐️ ⭐️
-  - part one: 70.780ms
-  - part two: 3232.923ms
+  - part one: 76.792ms
+  - part two: 78.968ms
 
 <!-- end completed section -->

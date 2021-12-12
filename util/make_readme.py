@@ -115,7 +115,7 @@ def get_full_year_paths() -> List[str]:
     Retrieves all directories in the ROOT_DIR that start with 'year_'
     """
     paths = [os.path.join(ROOT_DIR, val) for val in os.listdir(ROOT_DIR) if val.startswith('year_')]
-    return sorted(paths)
+    return sorted(paths, reverse=True)
 
 def get_full_day_paths(year_path: str) -> List[str]:
     """
