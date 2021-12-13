@@ -24,6 +24,13 @@ def store_nested_dict(dictionary, value, *keys):
     val[keys[-1]] = value
     return dictionary
 
+def sgn(a):
+    if a > 0: 
+        return 1
+    if a < 0:
+        return -1
+    return 0
+
 def overlap(Amin, Amax, Bmin, Bmax):
     "For inclusive ranges [Amin,Amax] and [Bmin, Bmax], do the ranges overlap?"
     return Amin <= Bmax and Bmin <= Amax
