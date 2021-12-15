@@ -1,5 +1,5 @@
 from typing import List
-from collections import defaultdict 
+from collections import defaultdict, deque 
 from util.console import console
 
 def parse(data: List[str]) -> List[int]:
@@ -28,11 +28,14 @@ class IntCode:
             self.opcodes[i] = val
         self.halted = False
         self.pointer = 0
-        self.initialised = False
         self.relative_base = 0
     def print(self, message):
         if self.debug:
             console.print(message)
+
+    def provide_inputs(self, inputs):
+        self.inputs = [i for i in inputs]
+
     def get_arguments(self, read_modes, offset):
         value = self.opcodes[self.pointer+offset]
         read_mode = read_modes[offset-1]
@@ -55,7 +58,7 @@ class IntCode:
         else:
             raise ValueError("Invalid Address Mode")
 
-    def run(self, inputs: list):
+    def run(self, inputs: list=None):
         opcodes = self.opcodes
         diagnostic_code = 0
         while True:
@@ -73,7 +76,7 @@ class IntCode:
                     opcodes[self.get_address(parameters,3)] = self.get_arguments(parameters, 2) * self.get_arguments(parameters, 1)
                     self.pointer += 4
                 elif instruction == INPUT:
-                    val = inputs.pop()
+                    val = self.inputs.pop()
                     self.print(f"INST {opcode:4}@{self.pointer:3}-INP in mode {parameters} -> Val {val} to {self.get_arguments(parameters, 1)}")
                     opcodes[self.get_address(parameters, 1)] = val
                     self.pointer +=2
