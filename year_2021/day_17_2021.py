@@ -4,6 +4,7 @@ from util.input_helper import read_entire_input
 from util.shared import sgn
 import re, math
 data = read_entire_input(2021,17)
+test = ["target area: x=20..30, y=-10..-5"]
 
 def parse(data: List[str]) -> Any:
     m = re.match(r'target area: x=(-?\d+)..(-?\d+), y=(-?\d+)..(-?\d+)',data[0])
@@ -35,7 +36,15 @@ def passed(state,bbox):
     return undershotx , overshotx , overshoty
 
 def max_height(state):
-    return state[1] + (state[4] * (state[4]+1))/2
+    return state[1] + (state[3] * (state[3]+1))/2 if state[3]>0 else 0
+
+def max_dist(state):
+    return state[2]*(state[2]-1)/2
+
+def en_route(state, bbox):
+    x,y,vx,_ = state
+    xmin,xmax, ymin,ymax = bbox
+    return (sgn(vx) == sgn(xmax - x) or (vx==0 and xmin <= x <= xmax)) and y >= ymin
 
 def will_be_in_box(state, bbox):
     x,y,vx,vy = state
@@ -46,33 +55,34 @@ def will_be_in_box(state, bbox):
         return False
     maxh = max_height(state)
 
-    
 @solution_timer(2021,17,1)
 def part_one(data: List[str]):
     bbox = parse(data)
-    o = []
-    for vx in range(0,30):
-        for vy in range(0,100):
+    vx0 = int(math.sqrt(2*bbox[0]))+1
+    for vy in range(200,0,-1):
+        for vx in range(vx0,30):
+            state = (0,0,vx,vy)
             maxh = max_height((0,0,vx,vy))
-
-            # print(vx,vy, end="")
-    #         state = (0,0,vx,vy)
-    #         maxh = -100
-    #         while not any(passed(state, bbox)):
-    #             # print(".",end="")
-    #             maxh = max(maxh, state[1])
-    #             state = step(state)
-    #             if within(state, bbox):
-    #                 o.append(maxh)
-    #         # print()
-    # return max(o)
+            while not any(passed(state, bbox)):
+                state = step(state)
+                if all(within(state, bbox)):
+                    return maxh#, vx, vy
 
 @solution_timer(2021,17,2)
 def part_two(data: List[str]):
-    _ = parse(data)
+    bbox = parse(data)
+    vx0 = int(math.sqrt(2*bbox[0]))+1
+    c=set()
+    for vx in range(vx0, bbox[1]+1):
+        for vy in range(min(bbox[2:])-1,200):
+            state = (0,0,vx,vy)
+            while en_route(state, bbox):
+                state = step(state)
+                if all(within(state, bbox)):
 
-    return False
-
+                    c.add((vx,vy))
+    return len(c)
+    
 if __name__ == "__main__":
     data = read_entire_input(2021,17)
     part_one(data)
