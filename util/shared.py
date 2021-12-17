@@ -4,7 +4,10 @@ so I've just put them together in a single file
 """
 
 from itertools import islice, zip_longest
-from typing import Any, Dict, Tuple
+import heapq
+from typing import Any, Dict, Tuple, TypeVar
+
+T = TypeVar('T')
 
 transpose = lambda l: list(map(list, zip(*l)))
 transpose.__doc__ = "Returns the transpose of a 2d array list-of-lists"
@@ -58,6 +61,20 @@ def render(points: PointDict, flipy=False, render_function=None):
         yrange = range(ymin, ymax+1)
     image = '\n'.join(''.join(render_function((i,j), points) for i in range(xmin, xmax+1)) for j in yrange)
     return image
+
+### Graph tools
+
+class PriorityQueue:
+    def __init__(self):
+        self.elements: List[Tuple[float, T]] = []
+    def empty(self) -> bool:
+        return not self.elements
+    def put(self, item: T, priority: float):
+        heapq.heappush(self.elements, (priority, item))
+    def get(self) -> T:
+        return heapq.heappop(self.elements)[1]
+
+
 
 ### ITERATION HELPERS
 

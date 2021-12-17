@@ -1,12 +1,11 @@
 import enum
 from typing import List, Any, Tuple, TypeVar, Dict
-import heapq
 import math
 from util.helpers import solution_timer
 from util.input_helper import read_entire_input
 from util.console import console
+from util.shared import PriorityQueue
 
-T = TypeVar('T')
 
 data = read_entire_input(2021,15)
 test = """1163751742
@@ -25,16 +24,6 @@ def parse(data: List[str]) -> Any:
 
 def dim(data):
     return len(data[0]), len(data)
-
-class PriorityQueue:
-    def __init__(self):
-        self.elements: List[Tuple[float, T]] = []
-    def empty(self) -> bool:
-        return not self.elements
-    def put(self, item: T, priority: float):
-        heapq.heappush(self.elements, (priority, item))
-    def get(self) -> T:
-        return heapq.heappop(self.elements)[1]
 
 def build_graph(risk_grid):
     output = {}

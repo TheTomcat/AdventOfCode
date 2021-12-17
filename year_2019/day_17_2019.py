@@ -281,7 +281,7 @@ def part_two(data: List[str]):
     while not robot.halted:
         output.append(robot.run())
 
-    return output
+    return output[-2]
 
 if __name__ == "__main__":
     data = read_entire_input(2019,17)
