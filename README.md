@@ -7,7 +7,7 @@
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
 <!-- Last updated -->
-Last updated 00:03 on Saturday 18 December, 2021
+Last updated 11:45 on Saturday 18 December, 2021
 <!-- End last updated -->
 
 <!-- start completed section -->
@@ -64,8 +64,8 @@ Last updated 00:03 on Saturday 18 December, 2021
   - part one: 4.226ms
   - part two: 7.222ms
 - day 17: ⭐️ ⭐️
-  - part one: 31.818ms
-  - part two: 181.705ms
+  - part one: 33.011ms
+  - part two: 182.505ms
 
 ### 2020
 

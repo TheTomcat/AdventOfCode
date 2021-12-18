@@ -79,9 +79,8 @@ def part_two(data: List[str]):
             while en_route(state, bbox):
                 state = step(state)
                 if all(within(state, bbox)):
-
                     c.add((vx,vy))
-    return len(c)
+    return c
     
 if __name__ == "__main__":
     data = read_entire_input(2021,17)
