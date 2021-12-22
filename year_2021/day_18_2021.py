@@ -1,5 +1,6 @@
 from typing import List, Any, Optional, Tuple, Type
 from collections import namedtuple, deque
+from itertools import product
 import enum
 from util.helpers import solution_timer
 from util.input_helper import read_entire_input
@@ -15,8 +16,18 @@ test = """[[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]
 [[9,3],[[9,9],[6,[4,9]]]]
 [[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]
 [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]""".split('\n')
+test2 = """[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]
+[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]
+[[2,[[0,8],[3,4]]],[[[6,7],1],[7,[1,6]]]]
+[[[[2,4],7],[6,[0,5]]],[[[6,8],[2,8]],[[2,1],[4,5]]]]
+[7,[5,[[3,8],[1,4]]]]
+[[2,[2,2]],[8,[8,1]]]
+[2,9]
+[1,[[[9,3],9],[[9,0],[0,7]]]]
+[[[5,[7,4]],7],1]
+[[[[4,2],2],6],[8,7]]""".split("\n")
 def parse(data: List[str]) -> Any:
-    return [iter(row) for row in data]
+    return [row for row in data]
         
 class Position(enum.Enum):
     L = 0
@@ -76,32 +87,36 @@ class Node:
             else:
                 node.R.join(Position.L, R)
         
-        if self.parent is not None:
-            if self.position == Position.L:
-                self.parent.L = 0
-            if self.position == Position.R:
-                self.parent.R = 0
+        # if self.parent is not None:
+        if self.position == Position.L:
+            self.parent.L = 0
+        if self.position == Position.R:
+            self.parent.R = 0
 
     def get(self, position: Position):
+        """Return the child of this node (L or R)"""
         if position == Position.L:
             return self.L
         else:
             return self.R
         
-    def put(self, position: Position, value: int):
+    def put(self, position: Position, node: "Node"):
+        "Insert `node` as a child to this node, either position L or R"
         if position == Position.L:
-            self.L = value
+            self.L = node
         else:
-            self.R = value
+            self.R = node
 
     def split(self, position: Position):
         v = self.get(position)
         if isnumber(v):
-            n = Node()
-            n.L = int(v//2)
-            n.R = int((v-1)//2+1)
-            n.depth = self.depth+1
-            self.put(position, n)
+            node = Node()
+            node.L = int(v//2)
+            node.R = int((v-1)//2+1)
+            node.depth = self.depth+1
+            node.parent = self
+            node.position = position
+            self.put(position, node)
 
     def join(self, position: Position, value: int):
         v = self.get(position)
@@ -120,14 +135,7 @@ class Node:
         return 3*L + 2*R
 
     def __add__(self, other: "Node"):
-        total = Node()
-        total.L = self
-        total.R = other
-        self.position = Position.L
-        other.position = Position.R
-        self.parent = other.parent = total
-        self.increase_depth()
-        other.increase_depth()
+        total = Node(f'[{self},{other}]')
         return total
     
     def increase_depth(self):
@@ -173,18 +181,25 @@ class Node:
 @solution_timer(2021,18,1)
 def part_one(data: List[str]):
     numbers = parse(data)
-    total: Node = Node(numbers[0]).reduce()
+    total: Node = Node(numbers[0])
     for number in numbers[1:]:
-        total = total + Node(number).reduce()
+        total = total + Node(number)
         total.reduce()
-
     return total.mag()
 
 @solution_timer(2021,18,2)
 def part_two(data: List[str]):
-    _ = parse(data)
-
-    return False
+    numbers = parse(data)
+    totals = []
+    for a, b in product(numbers, repeat=2):
+        if a == b:
+            continue
+        a = Node(a)
+        b = Node(b)
+        c = a+b
+        c.reduce()
+        totals.append(c.mag())
+    return max(totals)
 
 if __name__ == "__main__":
     data = read_entire_input(2021,18)
