@@ -52,40 +52,62 @@ def parse(data: List[str]) -> Dict[int, List]:
         scanners[sc_index].append(P(*tuple(int(i) for i in row.split(","))))
     return scanners
 
-def generate_differentials(scanner) -> List[Set[Tuple]]:
-    differentials = []
+def d(p1,p2):
+    return sum((i-j)**2 for i,j in zip(p1.pos,p2.pos)) 
+
+def generate_fingerprints(scanner) -> List[Set[Tuple]]:
+    fingerprints = [] # fingerprints[origin_beacon][beacon]
     for origin in scanner: # taking one beacon as the origin
-        diff = set()
+        fingerprint = set()
         for beacon in scanner: # and comparing it to every other one
             if beacon == origin:
                 continue
-            diff.add(tuple(sorted(abs(beacon-origin).pos))) 
+            iden = tuple(sorted(abs(beacon-origin).pos))
+            # iden = d(origin, beacon)
+            fingerprint.add(iden) 
             # Get the absolute value of x-o for each coordinate
             # And then sort them, because we don't actually care if it's x, y, or z
             # This will avoid having to worry about rotations until later
-        differentials.append(diff)
-    return differentials
+        fingerprints.append(fingerprint)
+    return fingerprints
 
 def find_adjacent_scanners(scanners):
-    differentials = {}
+    fingerprints = {}
     eqc = []
     for i, scanner in scanners.items():
-        differentials[i] = generate_differentials(scanner)
+        fingerprints[i] = generate_fingerprints(scanner)
     for i, j in product(range(len(scanners)), repeat=2):
         if i == j: continue
-        for beacon_k, diff_i in enumerate(differentials[i]):
-            for beacon_l, diff_j in enumerate(differentials[j]):
-                alike = diff_i.intersection(diff_j)
-                if len(alike) >= 11:
-                    add_to_equivalence_class(eqc, Beacon(scanner=i, beacon=beacon_k), Beacon(scanner=j, beacon=beacon_l))
+        for origin_k, fingerprint_i in enumerate(fingerprints[i]):
+            match = False
+            for origin_l, fingerprint_j in enumerate(fingerprints[j]):
+                alike = fingerprint_i.intersection(fingerprint_j)
+                if len(alike) == 11: 
+                    # we have found a set of points that have 11 matching fingerprints
+                    # This implies that the origin and 11 matching points are in both scanners
+                    # for matching_diff in alike:
+                    #     beacon_1 = fingerprint_i.index(matching_diff)
+                    #     beacon_2 = fingerprint_j.index(matching_diff)
+                    add_to_equivalence_class(eqc, Beacon(scanner=i, beacon=origin_k), Beacon(scanner=j, beacon=origin_l))
+                    match = True
                     continue 
+            if match:
+                continue
     return eqc
 
-def pull(eqc, a, b):
-    f = lambda eq: any(k.beacon in [a,b] for k in eq)
-    g = lambda eq: tuple(i for i in eq if i.beacon in [a,b])
-    return list(map(g, filter(f, eqc)))
-    return list(filter(lambda eq: all(k.scanner in [a,b] for k in eq),eqc))
+def by_scanner(*scanners):
+    def f(beacon):
+        return beacon.scanner in scanners
+    return f
+
+def find_matched_beacons(eqc, *scanners):
+    return list(filter(lambda x: len(x)==len(scanners), (list(filter(by_scanner(scanners), i)) for i in eqc)))
+
+def find_equivalent_beacons(scanners, equivalence_classes):
+    output = []
+    for eqc in equivalence_classes:
+        output.append([(Beacon(scanner=b.scanner, beacon=b.beacon), scanners[b.scanner][b.beacon]) for b in eqc])
+    return output
 
 @solution_timer(2021,19,1)
 def part_one(data: List[str]):
