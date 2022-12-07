@@ -4,6 +4,9 @@ from collections import deque
 
 T = TypeVar('T')
 
+# Adapted largely from https://www.redblobgames.com/pathfinding/a-star/introduction.html
+# Amit Patel, Red Blob Games
+
 class PriorityQueue(Generic[T]):
     """A priority queue.
     """

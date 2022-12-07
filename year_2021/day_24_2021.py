@@ -1,6 +1,7 @@
 from typing import List, Any, Tuple
 from util.helpers import solution_timer
 from util.input_helper import read_entire_input
+from util.shared import grouper
 
 data = read_entire_input(2021,24)
 
@@ -81,11 +82,26 @@ class TranslateALU:
                     elif command == "eql":
                         self.pyth.append(f"{var1}=1 if {var1} == {var2} else 0")             
 
+Z_divisor_offset = 4
+X_addend_offset = 5
+Y_addend_offset = 15
+Instr_length = 18
+
+def extract_values(instructions):
+    As = []
+    Bs = []
+    Cs = []
+    for block in grouper(Instr_length, instructions):
+        As.append(int(block[Z_divisor_offset][-1]))
+        Bs.append(int(block[X_addend_offset][-1]))
+        Cs.append(int(block[Y_addend_offset][-1]))
+    return As, Bs, Cs
+
 @solution_timer(2021,24,1)
 def part_one(data: List[str]):
     instructions = parse(data)
     alu = ALU(instructions)
-    alu.run([])
+    #alu.run([])
     return alu
 
 @solution_timer(2021,24,2)
