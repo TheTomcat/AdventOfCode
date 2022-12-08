@@ -15,7 +15,10 @@ def _download_input(year: int, day: int, session: str) -> bytes:
     cookies = {'session': session}
     url = f'https://adventofcode.com/{year}/day/{day}/input'
     resp = requests.get(url, cookies=cookies)
+    #try:
     resp.raise_for_status()
+    #except HTTPError as e:
+
     return resp.content  # type: ignore
 
 def _read_session() -> str:
