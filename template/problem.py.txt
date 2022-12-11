@@ -3,6 +3,7 @@ from util.helpers import solution_timer
 from util.input_helper import read_entire_input
 
 data = read_entire_input(%YEAR%,%DAY%)
+test = """""".split("\n")
 
 def parse(data: List[str]) -> Any:
     return data

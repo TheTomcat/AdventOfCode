@@ -1,13 +1,13 @@
 import sys
 import os
-from typing import List, Tuple
+from typing import List, Tuple, Union
 from argparse import ArgumentParser
 from util.input_helper import read_entire_input
-from util.make_readme import append_new_run_times, _create_completed_text, generate_readme
+from util.make_readme import append_new_run_times, _create_completed_text, generate_readme, _find_completed_days
 from util.console import console
 from config import ROOT_DIR
 
-def run_day(year, day):#module: str, year: int, day: int):
+def run_day(year, day, test=False):#module: str, year: int, day: int):
     """
     Runs given days solution
     """
@@ -20,8 +20,15 @@ def run_day(year, day):#module: str, year: int, day: int):
         console.print(f"[yellow]Attempting to create template solution...")
         create_day(year, day)
         return
-
-    data = read_entire_input(year, day)
+    if test:
+        try:
+            data = getattr(module, 'test')
+        except AttributeError:
+            console.print(f"[red]There was no test data found for problem {day} from {year}")
+            return
+    else:
+        data = read_entire_input(year, day)
+    
     try:
         r1, p1 = getattr(module, 'part_one')(data)
     except AttributeError:
@@ -31,23 +38,32 @@ def run_day(year, day):#module: str, year: int, day: int):
         r2, p2 = getattr(module, 'part_two')(data)
     except AttributeError:
         pass
-    append_new_run_times(r1,p1,r2,p2,day,year)
-    # print(_create_completed_text())
 
-    generate_readme() 
-    # This will run the solution a second time if the solution is incomplete, which isn't a problem for short 
-    # solutions but will be a problem for ones that take a long time.
-    # I can't be bothered fixing this right now.
+    if not test:
+        append_new_run_times(r1,p1,r2,p2,day,year)
+        # print(_create_completed_text())
+
+        generate_readme() 
+        # This will run the solution a second time if the solution is incomplete, which isn't a problem for short 
+        # solutions but will be a problem for ones that take a long time.
+        # I can't be bothered fixing this right now.
 
 def run():
-    year, day = _parse_args(sys.argv[1:])
+    year, day, test = _parse_args(sys.argv[1:])
+    # if year is None:
+    #     year_paths = get_full_year_paths()
+    #     pass # run every problem - this will take a long time so alert the user?
+    #     return
+    # if day == '.':
+        
+
     if day is not None:
         if day > 25:
             console.print(f"[red]I can't run the problem for {year}-{day} because {day}>25")
             return
-        run_day(year, day)
+        run_day(year, day, test)
     else:
-        run_day(year, 1)
+        run_day(year, 1, test)
     
     
 def create_day(year, day):
@@ -85,13 +101,19 @@ def create_day(year, day):
     console.print(f"[green]  Success!")
     return True
 
+def opt_int(arg: Union[int,str]) -> Union[int,str]:
+    if arg == ".":
+        return arg
+    return int(arg)
+
 def _parse_args(args: List[str]) -> Tuple[int, int]:
     parser = ArgumentParser(description='Add a day')
-    parser.add_argument('year', type=int, help='The year of the exercise')
-    parser.add_argument('day', type=int, help='The day of the exercise')
+    parser.add_argument('year', type=opt_int, help='The year of the exercise')
+    parser.add_argument('day', type=opt_int, help='The day of the exercise', )
+    parser.add_argument('-t', '--test', action='store_true')
     #parser.add_argument('quiet', type=int, help='Suppress errors', default=False)
     parsed = parser.parse_intermixed_args(args)
-    return parsed.year, parsed.day#, parsed.quiet
+    return parsed.year, parsed.day, parsed.test#, parsed.quiet
 
 if __name__=="__main__":
     run()

@@ -125,6 +125,7 @@ def get_full_day_paths(year_path: str) -> List[str]:
     return sorted(paths)
 
 def get_module(year: int, day: int): 
+    "Return the module corresponding to a particular year and day"
     module_name = f"day_{day:02}_{year}"
     module_path = os.path.join(ROOT_DIR, f'year_{year}', module_name+".py")
     spec = importlib.util.spec_from_file_location(module_name, module_path)

@@ -24,6 +24,7 @@ def is_visible(heights, W, H, x, y):
         while 0 <= cx < W and 0 <= cy < H:
             if heights[cx,cy] >= this_height:
                 visible[i] = (dx,dy)
+                #return visible
             cx += dx
             cy += dy
     return visible
