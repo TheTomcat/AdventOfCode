@@ -48,9 +48,9 @@ class CRT(CPU):
         self.display = []
     def check(self):
         if self.x-1 <= self.cycles % 40 <= self.x+1:
-            self.display += "#"
+            self.display += chr(9608)
         else:
-            self.display += '.'
+            self.display += ' '
     def print(self):
         return '\n'+'\n'.join(''.join(self.display[i+row*40] for i in range(40)) for row in range(6))
     

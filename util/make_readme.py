@@ -124,6 +124,11 @@ def get_full_day_paths(year_path: str) -> List[str]:
     paths = [os.path.join(year_path, val) for val in os.listdir(year_path) if val.startswith('day_')]
     return sorted(paths)
 
+def get_year_and_day_from_day_path(day_path: str) -> tuple[int]:
+    # print(day_path)
+    # day_path = day_path.split(os.sep)[0]
+    return int(day_path.split("_")[-1][:-3]), int(day_path.split("_")[-2])
+
 def get_module(year: int, day: int): 
     "Return the module corresponding to a particular year and day"
     module_name = f"day_{day:02}_{year}"

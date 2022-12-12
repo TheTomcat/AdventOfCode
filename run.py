@@ -3,7 +3,8 @@ import os
 from typing import List, Tuple, Union
 from argparse import ArgumentParser
 from util.input_helper import read_entire_input
-from util.make_readme import append_new_run_times, _create_completed_text, generate_readme, _find_completed_days
+from util.make_readme import (append_new_run_times, _create_completed_text, generate_readme, 
+            _find_completed_days, get_full_day_paths, get_full_year_paths, get_year_and_day_from_day_path)
 from util.console import console
 from config import ROOT_DIR
 
@@ -50,7 +51,22 @@ def run_day(year, day, test=False):#module: str, year: int, day: int):
 
 def run():
     year, day, test = _parse_args(sys.argv[1:])
-    # if year is None:
+    if year == ".":
+        resp = input("You have requested to run every problem. This could take some time. Continue? [Y/n]: ")
+        if resp in ["n", "N"]:
+            return
+        raise NotImplementedError
+    year_paths = get_full_year_paths()
+    year_path = [y for y in year_paths if str(year) in y][0]
+    if day == "." and isinstance(year, int):
+        console.print(f"[green]Running all problems for year {year}:")
+        
+        day_paths = get_full_day_paths(year_path)
+        for day_path in day_paths:
+            year, day = get_year_and_day_from_day_path(day_path)
+            #console.print(f"Attempting to run problem {year}-{day}")
+            run_day(year, day)
+        return
     #     year_paths = get_full_year_paths()
     #     pass # run every problem - this will take a long time so alert the user?
     #     return

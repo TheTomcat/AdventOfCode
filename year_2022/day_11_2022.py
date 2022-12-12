@@ -1,6 +1,7 @@
 from typing import List, Any, Tuple
 from util.helpers import solution_timer
 from util.input_helper import read_entire_input
+from util.console import log
 
 import re
 from math import prod, lcm
@@ -68,23 +69,23 @@ class Monkey:
     def take_turn(self, monkeys, part_one=True, worry_reducer=1):
         while self.items:
             item = self.items.pop(0)
-            #print(f"  Monkey inspects an item with a worry level of {item}")
+            # log.debug(f"  Monkey inspects an item with a worry level of {item}")
             self.inspections += 1
             item = self.operation(item)
-            #print(f"    Worry level is modified to {item}")
+            # log.debug(f"    Worry level is modified to {item}")
             if part_one:
                 item = item // 3
             else:
                 item = item % worry_reducer
-            #print(f"    Monkey gets bored with item. Worry level is divided by 3 to {item}")
+            # log.debug(f"    Monkey gets bored with item. Worry level is divided by 3 to {item}")
             if item % int(self.test) == 0:
-                #print(f"    Current worry level is divisible by {self.test}")
+                # log.debug(f"    Current worry level is divisible by {self.test}")
                 monkeys[self.on_true].accept(item)
-                #print(f"    Item with worry level {item} is thrown to monkey {self.on_true}.")
+                # log.debug(f"    Item with worry level {item} is thrown to monkey {self.on_true}.")
             else:
-                #print(f"    Current worry level is not divisible by {self.test}")
+                # log.debug(f"    Current worry level is not divisible by {self.test}")
                 monkeys[self.on_false].accept(item)
-                #print(f"    Item with worry level {item} is thrown to monkey {self.on_false}.")
+                # log.debug(f"    Item with worry level {item} is thrown to monkey {self.on_false}.")
     def accept(self, item):
         self.items.append(item)
 
@@ -103,9 +104,9 @@ def part_two(data: List[str]):
     for i in range(10000):
         for index, monkey in monkeys.items():
             monkey.take_turn(monkeys, part_one=False, worry_reducer=worry_reducer)
-        # print(f"== After round {i+1} ==")
+        # log.debug(f"== After round {i+1} ==")
         # for index, monkey in monkeys.items():
-        #     print(f"Monkey {index} inspected items {monkey.inspections} times.")
+        #     log.debug(f"Monkey {index} inspected items {monkey.inspections} times.")
         # input()
     return prod(sorted([i.inspections for i in monkeys.values()], reverse=True)[:2])
 
