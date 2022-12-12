@@ -14,7 +14,7 @@ def parse(data: List[str]) -> Any:
     return input_digits, output_digits
 
 @solution_timer(2021,8,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     _, output_digits = parse(data)
     count = 0
     for entry in output_digits:
@@ -67,7 +67,7 @@ def read_output(input_signal: List[set], output_signal: List[set]) -> int:
     return 1000*output[0] + 100*output[1] + 10*output[2] + output[3]
 
 @solution_timer(2021,8,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     inputs, outputs = parse(data)
     total = 0
     for input_signal, output_signal in zip(inputs, outputs):

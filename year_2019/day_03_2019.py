@@ -131,13 +131,13 @@ def build_point_list(wire):
             yield x,y
 
 @solution_timer(2019,3,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     wire1, wire2 = parse(data)
     intersections = sorted(find_intersections(wire1, wire2), key=lambda x: abs(x[0])+abs(x[1]))
     return abs(intersections[1][0]) + abs(intersections[1][1])
 
 @solution_timer(2019,3,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     wire1, wire2 = parse(data)
     intersections = sorted(find_intersections(wire1, wire2), key=lambda x: abs(x[0])+abs(x[1]))
     length_to_intersection = []

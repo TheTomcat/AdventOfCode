@@ -67,14 +67,14 @@ def calculate_directory_size(dirs, path):
     return total
 
 @solution_timer(2022,7,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     shell_output = parse(data)
     directories = build_directory(shell_output)
     sizes = [(path, calculate_directory_size(directories, path)) for path in directories]
     return sum([size for path,size in sizes if size < 100000])
 
 @solution_timer(2022,7,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     shell_output = parse(data)
     directories = build_directory(shell_output)
     sizes = [(path, calculate_directory_size(directories, path)) for path in directories]

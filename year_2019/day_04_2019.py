@@ -72,13 +72,13 @@ def is_part_one_password(digits: List[int]) -> bool:
     return is_monotonic(digits) and has_repeated_digits(digits)
 
 @solution_timer(2019,4,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     low, high = parse(data)
     return len(smart_check(low, high, has_repeated_digits)) # 3ms -> No need to check for monotonicity as the iterator does that already
     #return brute_check(low, high, is_part_one_password) # 950ms
 
 @solution_timer(2019,4,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     low, high = parse(data)
     return len(smart_check(low, high, has_exactly_double_digits)) # 3ms
 

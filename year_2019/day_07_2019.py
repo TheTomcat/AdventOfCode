@@ -161,7 +161,7 @@ def run_feedback_amplifier(data, phase_settings):
 # run_feedback_amplifier(test, [9,7,8,5,6]) -> 18216
 
 @solution_timer(2019,7,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     outputs = []
     for phase_settings in permutations(range(5)):
         signal = run_amplifier(data, phase_settings)
@@ -169,7 +169,7 @@ def part_one(data: List[str]):
     return sorted(outputs,reverse=True)[0][0]
 
 @solution_timer(2019,7,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     outputs = []
     phase_settings = [9,7,8,5,6]
     for phase_settings in permutations(range(5,10)):

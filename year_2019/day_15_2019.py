@@ -117,14 +117,14 @@ def longest_line(map, start):
     return distances
 
 @solution_timer(2019,15,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     robot = Robot(instructions)
     robot.explore()
     return robot.distances[[i for i,v in robot.map.items() if v == 2][0]]
 
 @solution_timer(2019,15,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     instructions = parse(data)
     robot = Robot(instructions)
     robot.explore()

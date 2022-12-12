@@ -59,7 +59,7 @@ def step(octopuses,W,H):
     return octopuses    
 
 @solution_timer(2021,11,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     octopuses, W, H = parse(data)
     flashes = 0
     for _ in range(100):
@@ -68,7 +68,7 @@ def part_one(data: List[str]):
     return flashes
 
 @solution_timer(2021,11,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     octopuses, W, H = parse(data)
     i = 0
     while True:

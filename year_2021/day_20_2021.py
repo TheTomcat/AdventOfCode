@@ -53,7 +53,7 @@ def count_on(image):
     return sum(True if val else False for val in image.values())
 
 @solution_timer(2021,20,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     iea, image = parse(data)
     
     im2 = run_iea(iea, image, True)
@@ -61,7 +61,7 @@ def part_one(data: List[str]):
     return count_on(im2)#sum(True if val else False for val in im2.values())
 
 @solution_timer(2021,20,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     iea, im2 = parse(data)
     for _ in range(25):
         im2 = run_iea(iea, im2, True)

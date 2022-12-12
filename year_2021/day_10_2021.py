@@ -38,7 +38,7 @@ def read_instructions(chunk: List[str]):
 
 
 @solution_timer(2021,10,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     chunks = parse(data)
     total = 0
     points = {")":3, "]":57, "}":1197,">":25137}
@@ -49,7 +49,7 @@ def part_one(data: List[str]):
     return total
 
 @solution_timer(2021,10,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     chunks = parse(data)
     points = {")":1, "]":2, "}":3,">":4}
     scores = []

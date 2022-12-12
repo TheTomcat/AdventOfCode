@@ -195,14 +195,14 @@ def highlight_differences(string1, string2):
             yield i, (a, b)
 
 @solution_timer(2021,23,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     state = parse(data)
     paths = build_paths(G)
     mapping, end_node = A_star(state, END, lambda st: neighbours(st, paths, 2), lambda st,_: heuristic(st, paths, 2))#, draw=lambda x: None)
     return mapping[end_node]['cost']
 
 @solution_timer(2021,23,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     state = parse(data)
     state = state[:15] + 'DCBA'+'DBAC' + state[15:]
     #state = '...........BCBDDCBADBACADCA'

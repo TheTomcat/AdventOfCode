@@ -20,13 +20,13 @@ def recursive_calculate_fuel(mass):
     return total_fuel
     
 @solution_timer(2019,1,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     weights = parse(data)
     fuel = [calculate_fuel(weight) for weight in weights]
     return sum(fuel)
 
 @solution_timer(2019,1,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     weights = parse(data)
     fuel = [recursive_calculate_fuel(weight) for weight in weights]
     return sum(fuel)

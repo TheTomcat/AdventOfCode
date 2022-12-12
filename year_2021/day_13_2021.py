@@ -69,7 +69,7 @@ def render(points):
     return image
 
 @solution_timer(2021,13,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     points, folds = parse(data)
     v, a = folds[0]
     if v == 'x':
@@ -80,7 +80,7 @@ def part_one(data: List[str]):
     return len(points)
 
 @solution_timer(2021,13,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     points, folds = parse(data)
     for instruction in folds:
         v, a = instruction

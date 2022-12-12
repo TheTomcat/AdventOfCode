@@ -22,7 +22,7 @@ def calculate_crab_fuel_quadratic(crabs, final_position):
     
 
 @solution_timer(2021,7,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     crabs = parse(data)
     fuel = []
     for position in range(min(crabs), max(crabs)):
@@ -30,7 +30,7 @@ def part_one(data: List[str]):
     return min(fuel)
 
 @solution_timer(2021,7,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     crabs = parse(data)
     # Actually the minimum for this will be the average (minimising the squared distance)
     guess = calculate_crab_fuel_quadratic(crabs, int(sum(crabs)/len(crabs)))

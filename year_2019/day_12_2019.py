@@ -44,7 +44,7 @@ def lcm(x, y):
     return x // b * y
 
 @solution_timer(2019,12,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     moons = parse(data)
     debug = False
     for i in range(1000):
@@ -62,7 +62,7 @@ def part_one(data: List[str]):
     return energy(moons)
 
 @solution_timer(2019,12,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     moons = parse(data)
     xs, ys, zs = set(), set(), set()
     while True:

@@ -99,12 +99,12 @@ def calculate_ore_required(reactions, fuel=1):
     return ore
 
 @solution_timer(2019,14,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     reactions = parse(data)
     return calculate_ore_required(reactions, 1)
 
 @solution_timer(2019,14,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     reactions = parse(data)
     high = 1E12 // calculate_ore_required(reactions, 1)
     while calculate_ore_required(reactions, high) < 1E12:

@@ -32,7 +32,7 @@ def parse(data: List[str]) -> Any:
     return instructions
 
 @solution_timer(2022,9,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     tail_positions = set()
     head_pos = (0,0)
@@ -63,7 +63,7 @@ def render(rope, X, Y):
         print()
 
 @solution_timer(2022,9,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     instructions = parse(data)
     tail_positions = set()
     rope = [(0,0) for i in range(10)]

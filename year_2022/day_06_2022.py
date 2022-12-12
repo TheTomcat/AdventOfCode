@@ -10,14 +10,14 @@ def parse(data: List[str]) -> Any:
     return data
 
 @solution_timer(2022,6,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     datastream = parse(data)[0]
     for i, code in enumerate(window(datastream, n=4)):
         if len(set(code))==4:
             return i+4
 
 @solution_timer(2022,6,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     datastream = parse(data)[0]
     for i, code in enumerate(window(datastream, n=14)):
         if len(set(code))==14:

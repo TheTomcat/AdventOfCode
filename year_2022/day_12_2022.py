@@ -40,16 +40,20 @@ def render_function(path):
             return f'[green]{points[point]}[/green]'
     return inner
 
-def neighbours1(heightmap):
+def neighbours(heightmap, reverse=False):
     def inner(current):
         cur_el = elevation(heightmap[current])
         for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
             neighbour = current[0]+dx, current[1]+dy
             if neighbour not in heightmap:
                 continue
-            if elevation(heightmap[neighbour]) > cur_el + 1:
-                # If the neighbour is greater than 1 higher than our position, we can't go there
-                continue
+            if reverse:
+                if elevation(heightmap[neighbour]) + 1 < cur_el:
+                    continue
+            else:
+                if elevation(heightmap[neighbour]) > cur_el + 1:
+                # If the neighbour is less than 1 lower than our position, we can't backtrack to this position
+                    continue
             yield neighbour, 1
     return inner
 
@@ -57,7 +61,7 @@ def neighbours1(heightmap):
 def part_one(data: List[str], verbose=False):
     heightmap, start, end = parse(data)
 
-    path, end = search(start, neighbours=neighbours1(heightmap), end=lambda x: x==end, depth_first=True)
+    path, end = search(start, neighbours=neighbours(heightmap), end=lambda x: x==end, depth_first=True)
     
     reconstructed_path = construct_path(path, end)
 
@@ -67,24 +71,11 @@ def part_one(data: List[str], verbose=False):
 
     return len(reconstructed_path)-1
 
-def neighbours2(heightmap):
-    def inner(current):
-        cur_el = elevation(heightmap[current])
-        for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
-            neighbour = current[0]+dx, current[1]+dy
-            if neighbour not in heightmap:
-                continue
-            if elevation(heightmap[neighbour]) + 1 < cur_el:
-                # If the neighbour is less than 1 lower than our position, we can't backtrack to this position
-                continue
-            yield neighbour, 1
-    return inner
-
 @solution_timer(2022,12,2)
 def part_two(data: List[str], verbose=False):
     heightmap, _, start = parse(data)
 
-    path, end = search(start, neighbours=neighbours2(heightmap), end=lambda x: elevation(heightmap[x])==0, depth_first=True)
+    path, end = search(start, neighbours=neighbours(heightmap, reverse=True), end=lambda x: elevation(heightmap[x])==0, depth_first=True)
     
     reconstructed_path = construct_path(path, end)
 

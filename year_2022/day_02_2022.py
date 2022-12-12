@@ -30,7 +30,7 @@ def points_for_win(opp, strat):
     return 0
     
 @solution_timer(2022,2,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     moves = parse(data)
     score = 0
     for opp, strat in moves:
@@ -49,7 +49,7 @@ points_for_outcome = {
 }
 
 @solution_timer(2022,2,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     moves = parse(data)
     score = 0
     for opp, outcome in moves:

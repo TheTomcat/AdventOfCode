@@ -77,13 +77,13 @@ def big_laser(station, asteroids):
     return destroyed
 
 @solution_timer(2019,10,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     asteroids = parse(data)
     output = compute_station_locations(asteroids)
     return max(output, key=lambda x: x[1])
 
 @solution_timer(2019,10,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     asteroids = parse(data)
     output = compute_station_locations(asteroids)
     station = max(output, key=lambda x: x[1])[0]

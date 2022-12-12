@@ -179,7 +179,7 @@ class Node:
             return
 
 @solution_timer(2021,18,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     numbers = parse(data)
     total: Node = Node(numbers[0])
     for number in numbers[1:]:
@@ -188,7 +188,7 @@ def part_one(data: List[str]):
     return total.mag()
 
 @solution_timer(2021,18,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     numbers = parse(data)
     totals = []
     for a, b in product(numbers, repeat=2):

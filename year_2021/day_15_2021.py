@@ -83,13 +83,13 @@ def expand(risk_grid, factor = 5):
     #return [[i for i in row] for row in data]
 
 @solution_timer(2021,15,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     risk_grid = parse(data)
     _, cost = a_star(risk_grid, (0,0), (99,99))
     return cost[(99,99)]
 
 @solution_timer(2021,15,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     risk_grid = parse(data)
     expanded_risk_grid = expand(risk_grid)
     _, cost = a_star(expanded_risk_grid, (0,0), (499,499))

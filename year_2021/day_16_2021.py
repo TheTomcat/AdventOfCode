@@ -115,13 +115,13 @@ def op_eqt(subpackets: List[Packet]) -> int:
     return int(evaluate_packet(subpackets[0]) == evaluate_packet(subpackets[1]))
 
 @solution_timer(2021,16,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     bits = parse(data)
     return calculate_version_sum(decode_packet(bits))
 
 
 @solution_timer(2021,16,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     bits = parse(data)
     packet = decode_packet(bits)
     return evaluate_packet(packet)

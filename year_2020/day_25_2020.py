@@ -39,14 +39,14 @@ def baby_step_giant_step(subject_number, pubkey, modulus=PRIME):
     raise ValueError("No solution found")
 
 @solution_timer(2020,25,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     card_public_key, door_public_key = parse(data)
     card_loop_size = baby_step_giant_step(7, card_public_key)
     return pow(door_public_key, card_loop_size, PRIME)
     #return brute_force_get_encryption_key(card_public_key, door_public_key)
 
 @solution_timer(2020,25,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _ = parse(data)
 
     return True

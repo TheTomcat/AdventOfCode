@@ -65,13 +65,13 @@ def cost(from_point, to_point, points: Dict[tuple, str], visited):
             return math.inf
 
 @solution_timer(2019,18,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     _ = parse(data)
 
     return False
 
 @solution_timer(2019,18,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _ = parse(data)
 
     return False

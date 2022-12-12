@@ -31,13 +31,13 @@ def run_robot(data:List[str], init=0):
     return is_white
 
 @solution_timer(2019,11,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     is_white = run_robot(instructions)
     return len(is_white)
 
 @solution_timer(2019,11,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     instructions = parse(data)
     is_white = run_robot(instructions, 1)
     xmin = min(i[0] for i in is_white.keys())

@@ -28,7 +28,7 @@ def step(node: str, edges: Set[Tuple[str,str]]) -> List[str]:
     return E
 
 @solution_timer(2021,12,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     V, E = parse(data)
     front = deque()
     front.append((['start'],['start'])) # Route, Visited small caves
@@ -49,7 +49,7 @@ def part_one(data: List[str]):
     return len(paths)
 
 @solution_timer(2021,12,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     V, E = parse(data)
     front: Deque[List[str], Set[str], str] = deque() 
     front.append((['start'],set(['start']), "")) # Route, Visited small caves, double-visited cave

@@ -110,14 +110,14 @@ def find_equivalent_beacons(scanners, equivalence_classes):
     return output
 
 @solution_timer(2021,19,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     scanners = parse(data)
     eqc = find_adjacent_scanners(scanners)
     num_beacons = sum(len(i) for i in scanners.values())
     return num_beacons - sum(len(i) for i in eqc) + len(eqc)
 
 @solution_timer(2021,19,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _ = parse(data)
 
     return 0

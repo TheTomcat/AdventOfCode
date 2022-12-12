@@ -31,7 +31,7 @@ def is_visible(heights, W, H, x, y):
 
 
 @solution_timer(2022,8,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     heights, W, H = parse(data)
     c = 0
     for x in range(W):
@@ -59,7 +59,7 @@ def calculate_scenic_score(heights, W, H, x, y):
     
 
 @solution_timer(2022,8,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     heights, W, H = parse(data)
     scores = {}
     for y in range(H):

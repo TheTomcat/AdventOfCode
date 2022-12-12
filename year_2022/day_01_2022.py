@@ -9,7 +9,7 @@ def parse(data: List[str]) -> Any:
     return data
 
 @solution_timer(2022,1,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     calories = parse(data)
     totals = []
     for elf in calories:
@@ -17,7 +17,7 @@ def part_one(data: List[str]):
     return max(totals)
 
 @solution_timer(2022,1,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     calories = parse(data)
     totals = []
     for elf in calories:

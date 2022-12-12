@@ -64,13 +64,13 @@ def digits_to_int(digits):
     return sum(10**i * d for i, d in enumerate(reversed(digits)))
 
 @solution_timer(2019,16,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     digits = parse(data)
     output = better_approach(digits, 100)
     return digits_to_int(output[:8])
 
 @solution_timer(2019,16,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     digits = parse(data) *10000
     offset = digits_to_int(digits[:7])
     return different_approach(digits, 100, offset)

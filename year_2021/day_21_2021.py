@@ -52,13 +52,13 @@ def sim(s1, s2):
     
 
 @solution_timer(2021,21,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     d = DeterministicDice()
     s1, s2 = parse(data)
     return sim(s1, s2)
 
 @solution_timer(2021,21,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _ = parse(data)
 
     return False

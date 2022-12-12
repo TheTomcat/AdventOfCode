@@ -52,7 +52,7 @@ def count_on(states):
     return tot
 
 @solution_timer(2021,22,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     boot_instructions = parse(data)
     states = []
     for instruction in boot_instructions[:20]:
@@ -60,7 +60,7 @@ def part_one(data: List[str]):
     return count_on(states)
 
 @solution_timer(2021,22,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     boot_instructions = parse(data)
     states = []
     for instruction in boot_instructions:

@@ -18,7 +18,7 @@ def parse(data: List[str]) -> Any:
     return data
 
 @solution_timer(2022,3,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     rucksacks = parse(data)
     priorities = 0
     for compartments in rucksacks:
@@ -31,7 +31,7 @@ def part_one(data: List[str]):
     return priorities
 
 @solution_timer(2022,3,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     rucksacks = parse(data)
     priorities = 0
     for a,b,c in grouper(3, rucksacks):

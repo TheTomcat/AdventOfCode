@@ -20,7 +20,7 @@ def first(iterable, condition):
     return next((x for x in iterable if condition(x)), None)
 
 @solution_timer(2019,8,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     pixels = parse(data)
     output = []
     for chunk in split_layers(WIDTH*HEIGHT, pixels):
@@ -29,7 +29,7 @@ def part_one(data: List[str]):
     return os[0][1] * os[0][2]
 
 @solution_timer(2019,8,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     pixels = parse(data)
     chunks = list(split_layers(WIDTH*HEIGHT, pixels))
     image = []

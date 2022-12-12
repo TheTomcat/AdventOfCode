@@ -26,14 +26,14 @@ def run(opcodes):
         pointer += 4
 
 @solution_timer(2019,2,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     opcodes = parse(data)
     opcodes[1] = 12
     opcodes[2] = 2
     return run(opcodes)[0]
 
 @solution_timer(2019,2,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     opcodes = parse(data)
     for noun in range(0,99):
         for verb in range(0,99):

@@ -86,7 +86,7 @@ def rapid_polymerise(template, rules, steps):
     return elements
 
 @solution_timer(2021,14,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     template, rules = parse(data)
     polymer = rapid_polymerise(template, rules, 10)
     return (max(polymer.values()) - min(polymer.values()))/2
@@ -97,7 +97,7 @@ def part_one(data: List[str]):
     # return max(c.values()) - min(c.values())
 
 @solution_timer(2021,14,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     template, rules = parse(data)
     polymer = rapid_polymerise(template, rules, 40)
     return (max(polymer.values()) - min(polymer.values()))/2

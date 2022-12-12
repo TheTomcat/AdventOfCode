@@ -54,14 +54,14 @@ def find_first_common_element(A: list, B: list):
             return a
 
 @solution_timer(2019,6,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     orbits, _ = parse(data)
     root_node = Node('COM')
     build_orbital_tree(orbits, root_node)
     return root_node.total_degree
 
 @solution_timer(2019,6,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _, orbiting = parse(data)
     your_orbits = path_to_root(orbiting,'YOU').split(",")
     santa_orbits= path_to_root(orbiting,'SAN').split(",")

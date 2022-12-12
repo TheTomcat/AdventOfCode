@@ -56,7 +56,7 @@ def will_be_in_box(state, bbox):
     maxh = max_height(state)
 
 @solution_timer(2021,17,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     bbox = parse(data)
     vx0 = int(math.sqrt(2*bbox[0]))+1
     for vy in range(200,0,-1):
@@ -69,7 +69,7 @@ def part_one(data: List[str]):
                     return maxh#, vx, vy
 
 @solution_timer(2021,17,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     bbox = parse(data)
     vx0 = int(math.sqrt(2*bbox[0]))+1
     c=set()

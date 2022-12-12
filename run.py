@@ -8,7 +8,7 @@ from util.make_readme import (append_new_run_times, _create_completed_text, gene
 from util.console import console
 from config import ROOT_DIR
 
-def run_day(year, day, test=False):#module: str, year: int, day: int):
+def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: int):
     """
     Runs given days solution
     """
@@ -31,12 +31,12 @@ def run_day(year, day, test=False):#module: str, year: int, day: int):
         data = read_entire_input(year, day)
     
     try:
-        r1, p1 = getattr(module, 'part_one')(data)
+        r1, p1 = getattr(module, 'part_one')(data, verbose)
     except AttributeError:
         pass
 
     try:
-        r2, p2 = getattr(module, 'part_two')(data)
+        r2, p2 = getattr(module, 'part_two')(data, verbose)
     except AttributeError:
         pass
 
@@ -50,7 +50,7 @@ def run_day(year, day, test=False):#module: str, year: int, day: int):
         # I can't be bothered fixing this right now.
 
 def run():
-    year, day, test = _parse_args(sys.argv[1:])
+    year, day, test, verbose = _parse_args(sys.argv[1:])
     if year == ".":
         resp = input("You have requested to run every problem. This could take some time. Continue? [Y/n]: ")
         if resp in ["n", "N"]:
@@ -65,7 +65,7 @@ def run():
         for day_path in day_paths:
             year, day = get_year_and_day_from_day_path(day_path)
             #console.print(f"Attempting to run problem {year}-{day}")
-            run_day(year, day)
+            run_day(year, day, verbose=verbose)
         return
     #     year_paths = get_full_year_paths()
     #     pass # run every problem - this will take a long time so alert the user?
@@ -77,9 +77,9 @@ def run():
         if day > 25:
             console.print(f"[red]I can't run the problem for {year}-{day} because {day}>25")
             return
-        run_day(year, day, test)
+        run_day(year, day, test=test, verbose=verbose)
     else:
-        run_day(year, 1, test)
+        run_day(year, 1, test=test, verbose=verbose)
     
     
 def create_day(year, day):
@@ -127,9 +127,10 @@ def _parse_args(args: List[str]) -> Tuple[int, int]:
     parser.add_argument('year', type=opt_int, help='The year of the exercise')
     parser.add_argument('day', type=opt_int, help='The day of the exercise', )
     parser.add_argument('-t', '--test', action='store_true')
+    parser.add_argument('-v', '--verbose', action='store_true')
     #parser.add_argument('quiet', type=int, help='Suppress errors', default=False)
     parsed = parser.parse_intermixed_args(args)
-    return parsed.year, parsed.day, parsed.test#, parsed.quiet
+    return parsed.year, parsed.day, parsed.test, parsed.verbose#, parsed.quiet
 
 if __name__=="__main__":
     run()

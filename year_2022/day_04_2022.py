@@ -30,7 +30,7 @@ def range_length(range1):
     return range1[1] - range1[0] + 1
 
 @solution_timer(2022,4,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     ranges = parse(data)
     count=0
     for r1, r2 in ranges:
@@ -40,7 +40,7 @@ def part_one(data: List[str]):
     return count
 
 @solution_timer(2022,4,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     ranges = parse(data)
     count=0
     for r1, r2 in ranges:

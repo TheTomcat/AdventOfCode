@@ -159,13 +159,13 @@ def simulate_day2(tiles: DefaultDict[Tuple[int, int], bool]) -> DefaultDict[Tupl
     return tiles
 
 @solution_timer(2020,24,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     directions = parse(data)
     tiles = get_initial_tiles((0,0), directions)
     return sum([tiles[coord] for coord in tiles])
 
 @solution_timer(2020,24,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     directions = parse(data)
     tiles = get_initial_tiles((0,0), directions)
     for _ in range(100):

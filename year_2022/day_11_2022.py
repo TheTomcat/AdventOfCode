@@ -90,7 +90,7 @@ class Monkey:
         self.items.append(item)
 
 @solution_timer(2022,11,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     monkeys = parse(data)
     for i in range(20):
         for index, monkey in monkeys.items():
@@ -98,7 +98,7 @@ def part_one(data: List[str]):
     return prod(sorted([i.inspections for i in monkeys.values()], reverse=True)[:2])
 
 @solution_timer(2022,11,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     monkeys = parse(data)
     worry_reducer = lcm(*(monkey.test for monkey in monkeys.values()))
     for i in range(10000):

@@ -53,13 +53,13 @@ def flood_fill(height_map, WIDTH, HEIGHT, start):
     return basin
 
 @solution_timer(2021,9,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     height_map, W, H = parse(data)
     minima = find_minima(height_map, W, H)
     return sum(height_map[i]+1 for i in minima)
 
 @solution_timer(2021,9,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     height_map, W, H = parse(data)
     minima = find_minima(height_map, W, H)
     basins = {}

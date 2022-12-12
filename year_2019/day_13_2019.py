@@ -22,7 +22,7 @@ def render(screen, score):
     return image+'\n'+"-"*20 + f'{score:05d}' + "-"*20
 
 @solution_timer(2019,13,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     game = IntCode(instructions)
     screen = {}
@@ -34,7 +34,7 @@ def part_one(data: List[str]):
     return sum(1 for _, tile in screen.items() if tile == 2)
 
 @solution_timer(2019,13,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     render_screen = False
     instructions = parse(data)
     instructions[0] = 2

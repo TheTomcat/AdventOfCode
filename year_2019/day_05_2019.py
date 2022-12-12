@@ -114,12 +114,12 @@ def run(opcodes, inputs):
             raise ValueError(f"{instruction}:{opcode} is an invalid opcode")
 
 @solution_timer(2019,5,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     opcodes = parse(data)
     return run(opcodes, [1])
 
 @solution_timer(2019,5,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     opcodes = parse(data)
     return run(opcodes, [5])
 

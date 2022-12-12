@@ -42,14 +42,14 @@ def move9001(stacks, instruction):
     
 
 @solution_timer(2022,5,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     stacks, instructions = parse(data)
     for instruction in instructions:
         move9000(stacks, instruction)
     return ''.join([i[-1] for i in stacks])
 
 @solution_timer(2022,5,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     stacks, instructions = parse(data)
     for instruction in instructions:
         move9001(stacks, instruction)

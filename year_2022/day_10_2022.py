@@ -56,7 +56,7 @@ class CRT(CPU):
     
 
 @solution_timer(2022,10,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     c = CPU(x=1, breakpoints=[20,60,100,140,180,220])
     for instruction in instructions:
@@ -64,7 +64,7 @@ def part_one(data: List[str]):
     return c.sig_strengths()
 
 @solution_timer(2022,10,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     instructions = parse(data)
     c = CRT(x=1)
     for instruction in instructions:

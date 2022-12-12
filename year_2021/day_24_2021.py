@@ -98,14 +98,14 @@ def extract_values(instructions):
     return As, Bs, Cs
 
 @solution_timer(2021,24,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     alu = ALU(instructions)
     #alu.run([])
     return alu
 
 @solution_timer(2021,24,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _ = parse(data)
 
     return False

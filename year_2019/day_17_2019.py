@@ -251,14 +251,14 @@ def generate_movement_functions(main, A, B, C):
     }
 
 @solution_timer(2019,17,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     instructions = parse(data)
     camera = IntCode(instructions)
     image = take_picture(camera)
     return calculate_alignment_parameters(image)
 
 @solution_timer(2019,17,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     instructions = parse(data)
     robot = IntCode(instructions)
     scaffold, start, direction = generate_scaffolding(robot)
