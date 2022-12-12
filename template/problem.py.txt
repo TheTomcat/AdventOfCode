@@ -9,13 +9,13 @@ def parse(data: List[str]) -> Any:
     return data
 
 @solution_timer(%YEAR%,%DAY%,1)
-def part_one(data: List[str]):
+def part_one(data: List[str], verbose=False):
     _ = parse(data)
 
     return False
 
 @solution_timer(%YEAR%,%DAY%,2)
-def part_two(data: List[str]):
+def part_two(data: List[str], verbose=False):
     _ = parse(data)
 
     return False

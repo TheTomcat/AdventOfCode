@@ -1,5 +1,5 @@
 # Advent of Code ⭐️
-[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=148&color=yellow)]()
+[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=150&color=yellow)]()
 <!--[![codecov](https://codecov.io/gh/marcelblijleven/adventofcode/branch/master/graph/badge.svg?token=jZ2TgfyltM)](https://codecov.io/gh/marcelblijleven/adventofcode)
 [![tests](https://github.com/marcelblijleven/adventofcode/actions/workflows/tests.yaml/badge.svg)](https://github.com/marcelblijleven/adventofcode)
 [![version](https://img.shields.io/github/v/release/marcelblijleven/adventofcode.svg)](https://github.com/marcelblijleven/adventofcode/releases)
@@ -7,7 +7,7 @@
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
 <!-- Last updated -->
-Last updated 11:13 on Monday 12 December, 2022
+Last updated 17:22 on Monday 12 December, 2022
 <!-- End last updated -->
 
 <!-- start completed section -->
@@ -46,8 +46,11 @@ Last updated 11:13 on Monday 12 December, 2022
   - part one: 0.119ms
   - part two: 0.260ms
 - day 11: ⭐️ ⭐️
-  - part one: 1.228ms
-  - part two: 487.453ms
+  - part one: 1.213ms
+  - part two: 390.573ms
+- day 12: ⭐️ ⭐️
+  - part one: 22.698ms
+  - part two: 19.755ms
 
 ### 2021
 
