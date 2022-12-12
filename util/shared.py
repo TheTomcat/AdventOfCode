@@ -1,11 +1,12 @@
 """A collection of useful functions that I've had to use multiple times, 
 so I've just put them together in a single file
-
 """
 
 from itertools import islice, zip_longest
 import heapq
-from typing import Any, Dict, Tuple, TypeVar
+from typing import Any, Dict, Tuple, TypeVar, List
+
+from util.allen import AllenInterval
 
 T = TypeVar('T')
 
@@ -37,19 +38,8 @@ def overlap(Amin, Amax, Bmin, Bmax):
     "For inclusive ranges [Amin,Amax] and [Bmin, Bmax], do the ranges overlap?"
     return Amin <= Bmax and Bmin <= Amax
 
-def allens_relation(range1, range2):
-    "Return the Allen's interval algebra between range1 and range2"
-    if range1[1] < range2[0]:
-        return "<"
-    if range2[1] < range1[0]:
-        return ">"
-    
-    if range1[1] == range2[0] and range1[0] < range2[0]:
-        return "m"
-    if range2[1] == range1[0] and range:
-        return "mi"
-    
-
+AllenInterval = AllenInterval 
+# For a more definitive solution
 
 ### RENDERING HELPERS
 
@@ -87,8 +77,6 @@ class PriorityQueue:
         heapq.heappush(self.elements, (priority, item))
     def get(self) -> T:
         return heapq.heappop(self.elements)[1]
-
-
 
 ### ITERATION HELPERS
 
@@ -168,69 +156,3 @@ class SpiralIterator:
 
     def __iter__(self):
         return self
-
-# class Interval:
-#     '''Implements Allen's interval algebra
-#     https://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap'''
-
-#     def __init__(self, start: float, end: float) -> None:
-#         self.__start = min(start, end)
-#         self.__end = max(start, end)
-
-#     def __add__(self, other: 'Interval') -> str:
-#         pass
-
-#     def precedes(self, other: 'Interval') -> bool:
-#         return self.__end < other.__start
-
-#     def preceded_by(self, other: 'Interval') -> bool:
-#         return other.precedes(self)
-
-#     def meets(self, other: 'Interval') -> bool:
-#         return self.__end == other.__start
-
-#     def met_by(self, other: 'Interval') -> bool:
-#         return other.meets(self)
-
-#     def overlaps(self, other: 'Interval') -> bool:
-#         return (
-#             self.__start < other.__start and
-#             self.__end < other.__end and
-#             self.__end > other.__start
-#         )
-
-#     def overlaped_by(self, other: 'Interval') -> bool:
-#         return other.overlaps(self)
-
-#     def finishes(self, other: 'Interval') -> bool:
-#         return (
-#             self.__end == other.__end and
-#             self.__start > other.__start
-#         )
-
-#     def finished_by(self, other: 'Interval') -> bool:
-#         return other.finishes(self)
-
-#     def during(self, other: 'Interval') -> bool:
-#         return (
-#             other.__start < self.__start and
-#             self.__end < other.__end
-#         )
-
-#     def contains(self, other: 'Interval') -> bool:
-#         return other.during(self)
-
-#     def starts(self, other: 'Interval') -> bool:
-#         return (
-#             self.__start == other.__start and
-#             self.__end < other.__end
-#         )
-
-#     def started_by(self, other: 'Interval') -> bool:
-#         return other.starts(self)
-
-#     def equals(self, other: 'Interval') -> bool:
-#         return (
-#             other.__start == self.__start and
-#             other.__end == self.__end
-#         )
