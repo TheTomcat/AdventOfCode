@@ -32,20 +32,6 @@ def elevation(char):
         char = "z"
     return elevation.index(char)
 
-def render_(hm, reconstructed_path):
-    from util.console import console
-    xmin = min(i[0] for i in hm)
-    xmax = max(i[0] for i in hm)
-    ymin = min(i[1] for i in hm)
-    ymax = max(i[1] for i in hm)
-    for y in range(ymin, ymax+1):
-        for x in range(xmin, xmax+1):
-            if (x,y) in reconstructed_path:
-                console.print(f'[red]{hm[(x,y)]}[/red]', end="")
-            else:
-                console.print(f'[green]{hm[(x,y)]}[/green]', end="")
-        console.print("")
-
 def render_function(path):
     def inner(point, points):
         if point in path:
@@ -53,63 +39,6 @@ def render_function(path):
         else:
             return f'[green]{points[point]}[/green]'
     return inner
-
-# def h(a,b):
-#     return abs(a[0]-b[0])+abs(a[1]-b[1])
-
-# def neighbours(heightmap, move_condition):
-#     def inner(current):
-#         cur_el = elevation(heightmap[current])
-#         for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
-#             neighbour = current[0]+dx, current[1]+dy
-#             if neighbour not in heightmap:
-#                 continue
-#             if move_condition(cur_el, neighbour):
-#                 continue
-#             yield neighbour, 1
-#     return inner
-    
-# def find_path(heightmap, start, end_condition, move_condition):
-#     """Pathfinder
-#     heightmap: Dict[(coord)] -> 'abcdef...'
-#     start: the start coord
-#     end_condition: Function that evaluates to true when we can quit
-#     move_condition: f(current_elevation, neighbour_coordinate) -> true if we can move here """
-#     frontier = PriorityQueue()
-#     frontier.put(start, 0)
-#     cost_so_far = {}
-#     cost_so_far[start] = 0
-#     path = dict()
-#     path[start] = None
-
-#     while not frontier.is_empty():
-#         current = frontier.get()
-#         if end_condition(current):
-#             break
-#         cur_el = elevation(heightmap[current])
-#         for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
-#             neighbour = current[0]+dx, current[1]+dy
-#             if neighbour not in heightmap:
-#                 continue
-#             if move_condition(cur_el, neighbour):
-#                 continue
-#             new_cost = cost_so_far[current] + 1
-#             if neighbour not in cost_so_far or new_cost < cost_so_far[neighbour]:
-#                 cost_so_far[neighbour] = new_cost
-#                 priority = new_cost
-#                 frontier.put(neighbour, priority)
-#                 path[neighbour] = current
-#     return path, start, current
-
-# def reconstruct_path(path, start, end):
-#     current = end
-#     reconstructed_path = []
-#     while current != start:
-#         reconstructed_path.append(current)
-#         current = path[current]
-#     reconstructed_path.append(start)
-#     reconstructed_path.reverse()
-#     return reconstructed_path
 
 def neighbours1(heightmap):
     def inner(current):
@@ -119,6 +48,7 @@ def neighbours1(heightmap):
             if neighbour not in heightmap:
                 continue
             if elevation(heightmap[neighbour]) > cur_el + 1:
+                # If the neighbour is greater than 1 higher than our position, we can't go there
                 continue
             yield neighbour, 1
     return inner
@@ -145,6 +75,7 @@ def neighbours2(heightmap):
             if neighbour not in heightmap:
                 continue
             if elevation(heightmap[neighbour]) + 1 < cur_el:
+                # If the neighbour is less than 1 lower than our position, we can't backtrack to this position
                 continue
             yield neighbour, 1
     return inner
