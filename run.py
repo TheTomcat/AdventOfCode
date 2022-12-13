@@ -17,15 +17,15 @@ def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: 
     try:
         module = __import__(f"year_{year}.day_{day:02}_{year}", fromlist=['object'])
     except ModuleNotFoundError as e:
-        console.print(f"[red]There was no solution found for problem {day} from {year}")
-        console.print(f"[yellow]Attempting to create template solution...")
+        console.print(f"[red]There was no solution found for problem {day} from {year}[/red]")
+        console.print(f"[yellow]Attempting to create template solution...[/yellow]")
         create_day(year, day)
         return
     if test:
         try:
             data = getattr(module, 'test')
         except AttributeError:
-            console.print(f"[red]There was no test data found for problem {day} from {year}")
+            console.print(f"[red]There was no test data found for problem {day} from {year}[/red]")
             return
     else:
         data = read_entire_input(year, day)
@@ -52,14 +52,15 @@ def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: 
 def run():
     year, day, test, verbose = _parse_args(sys.argv[1:])
     if year == ".":
-        resp = input("You have requested to run every problem. This could take some time. Continue? [Y/n]: ")
+        resp = console.input("[yellow]You have requested to run every problem. This could take some time. Continue? [[green]Y[/green]/n]: [/yellow]")
         if resp in ["n", "N"]:
+            console.print('   ... aborting')
             return
         raise NotImplementedError
     year_paths = get_full_year_paths()
     year_path = [y for y in year_paths if str(year) in y][0]
     if day == "." and isinstance(year, int):
-        console.print(f"[green]Running all problems for year {year}:")
+        console.print(f"[green]Running all problems for year {year}:[/green]")
         
         day_paths = get_full_day_paths(year_path)
         for day_path in day_paths:
