@@ -1,7 +1,7 @@
 from functools import reduce 
 import math
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,13)
 test="""939
@@ -24,7 +24,7 @@ def compute_depature_time(earliest_leaving_time, active_busses):
         current_time += 1
 
 @solution_timer(2020,13,1)
-def part_one(data):
+def part_one(data, verbose=False):
     time, busses = parse(data)
     departure_time, bus_id = compute_depature_time(time, busses)
     return (departure_time-time)*bus_id
@@ -63,7 +63,7 @@ def solve(active_busses):
     return chinese_remainder(modulos, remainders)
 
 @solution_timer(2020,13,2)
-def part_two(data):
+def part_two(data, verbose=False):
     _, busses = parse(data)
     return solve(busses)
 

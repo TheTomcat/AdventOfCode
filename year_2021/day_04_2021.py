@@ -1,5 +1,5 @@
-from util.input_helper import read_entire_input, read_input_by_line
-from util.helpers import solution_timer
+from framework.input_helper import read_entire_input, read_input_by_line
+from framework.helpers import solution_timer
 from util.shared import window, transpose
 
 data = read_entire_input(2021,4)
@@ -43,7 +43,7 @@ def sum_square(square):
     return tot
 
 @solution_timer(2021,4,1)
-def part_one(data):
+def part_one(data, verbose=False):
     nums, squares = parse(data)
     for num in nums:
         for i, square in enumerate(squares):
@@ -52,7 +52,7 @@ def part_one(data):
                 return sum_square(square)* num
 
 @solution_timer(2021,4,2)
-def part_two(data):
+def part_two(data, verbose=False):
     nums, squares = parse(data)
     remove = []
     for num in nums:

@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,1)
 test = """1721
@@ -15,7 +15,7 @@ def parse(data):
     return [int(i) for i in data]
 
 @solution_timer(2020,1,1)
-def part_one(data):
+def part_one(data, verbose=False):
     expense_report = parse(data)
     for i, first_number in enumerate(expense_report):
         second_number = 2020 - first_number
@@ -23,7 +23,7 @@ def part_one(data):
                 return first_number * second_number
 
 @solution_timer(2020,1,2)
-def part_two(data):
+def part_two(data, verbose=False):
     expense_report = parse(data)
     for i, first_number in enumerate(expense_report):
         for second_number in expense_report[i+1:]:

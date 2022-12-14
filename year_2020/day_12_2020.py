@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,12)
 
@@ -45,7 +45,7 @@ def iterate(ship, commands):
     return ship
 
 @solution_timer(2020,12,1)
-def part_one(data):
+def part_one(data, verbose=False):
     commands = parse(data)
     ship = (0,0,90)
     output = iterate(ship, commands)
@@ -84,7 +84,7 @@ def iterate2(ship, waypoint, commands):
     return ship
 
 @solution_timer(2020,12,2)
-def part_two(data):
+def part_two(data, verbose=False):
     commands = parse(data)
     ship = (0,0,0)
     waypoint = (10,1,0)

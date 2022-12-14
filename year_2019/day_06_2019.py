@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import List, Any, Tuple, Dict
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2019,6)
 

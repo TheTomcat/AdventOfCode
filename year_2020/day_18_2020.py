@@ -1,7 +1,7 @@
 from typing import List
 from operator import add, mul
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,18)
 
@@ -88,13 +88,13 @@ opl = {"+":add,
        "*":mul}
 
 @solution_timer(2020,18,1)
-def part_one(data):
+def part_one(data, verbose=False):
     tokens = parse(data)
     return sum(evaluate_bracketed_expression(i) for i in tokens)
 
 
 @solution_timer(2020,18,2)
-def part_two(data):
+def part_two(data, verbose=False):
     tokens = parse(data)
     return sum(evaluate_bracketed_expression(i, left_to_right=False) for i in tokens)
 

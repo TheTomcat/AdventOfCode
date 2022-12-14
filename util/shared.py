@@ -3,7 +3,6 @@ so I've just put them together in a single file
 """
 
 from itertools import islice, zip_longest
-import heapq
 from typing import Any, Dict, Tuple, TypeVar, List
 
 from util.allen import AllenInterval
@@ -15,17 +14,6 @@ transpose.__doc__ = "Returns the transpose of a 2d array list-of-lists"
 
 Point = Tuple[int, int]
 PointDict = Dict[Point, Any]
-
-def store_nested_dict(dictionary, value, *keys):
-    val = dictionary
-    for key in keys[:-1]:
-        try:
-            val = val[key]
-        except KeyError as e:
-            val[key] = {}
-            val = val[key]
-    val[keys[-1]] = value
-    return dictionary
 
 def sgn(a):
     if a > 0: 
@@ -65,18 +53,6 @@ def render(points: PointDict, flipy=False, render_function=None):
         yrange = range(ymin, ymax+1)
     image = '\n'.join(''.join(render_function((i,j), points) for i in range(xmin, xmax+1)) for j in yrange)
     return image
-
-### Graph tools
-
-class PriorityQueue:
-    def __init__(self):
-        self.elements: List[Tuple[float, T]] = []
-    def empty(self) -> bool:
-        return not self.elements
-    def put(self, item: T, priority: float):
-        heapq.heappush(self.elements, (priority, item))
-    def get(self) -> T:
-        return heapq.heappop(self.elements)[1]
 
 ### ITERATION HELPERS
 

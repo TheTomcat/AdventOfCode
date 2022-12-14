@@ -9,6 +9,7 @@ python = "^3.10"
 rich = "^10.16.1"
 requests = "^2.26.0"
 tqdm = "^4.62.3"
+disjoint-set = "^0.7.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

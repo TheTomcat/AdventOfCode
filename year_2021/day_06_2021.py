@@ -1,6 +1,6 @@
 from typing import List
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2021,6)
 test=["3,4,3,1,2"]
@@ -39,7 +39,7 @@ def brute_force_simulate_fish(fishes, days):
     return fishes
 
 @solution_timer(2021,6,1)
-def part_one(data):
+def part_one(data, verbose=False):
     timers = parse(data)
     fishes = make_fish(timers)
     fishes = brute_force_simulate_fish(fishes, 80)
@@ -58,7 +58,7 @@ def smart_simulate_fish(timers, days):
     return sum(possible_ages)
 
 @solution_timer(2021,6,2)
-def part_two(data):
+def part_two(data, verbose=False):
     timers = parse(data)
     return smart_simulate_fish(timers, 256)
 

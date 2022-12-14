@@ -6,9 +6,19 @@ import datetime
 from typing import Dict, List
 
 from config import ROOT_DIR
-from util.console import nostdout
-from util.input_helper import read_entire_input
-from util.shared import store_nested_dict
+from framework.console import nostdout
+from framework.input_helper import read_entire_input
+
+def store_nested_dict(dictionary, value, *keys):
+    val = dictionary
+    for key in keys[:-1]:
+        try:
+            val = val[key]
+        except KeyError as e:
+            val[key] = {}
+            val = val[key]
+    val[keys[-1]] = value
+    return dictionary
 
 def generate_readme():
     path = os.path.join(ROOT_DIR, 'README.md')

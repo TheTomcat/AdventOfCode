@@ -3,8 +3,8 @@ from operator import mul
 from collections import defaultdict, deque
 from itertools import accumulate, islice, product
 
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import transpose
 
 data = read_entire_input(2020,20)
@@ -325,7 +325,7 @@ def find_monsters(map, monster):
     return tiled, count
 
 @solution_timer(2020,20,1)
-def part_one(data):
+def part_one(data, verbose=False):
     tiles = parse(data)
     # Old version!!! So sloww
     # neighbours = count_neighbours(tiles)
@@ -347,7 +347,7 @@ def part_one(data):
             m.tiles[(maxx,maxy)].id)
 
 @solution_timer(2020,20,2)
-def part_two(data):
+def part_two(data, verbose=False):
     tiles = parse(data)
     tile_list = [tile for tile in tiles.values()]
     m = Map(tile_list)

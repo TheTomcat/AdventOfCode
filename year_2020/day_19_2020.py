@@ -1,7 +1,7 @@
 from typing import List, Dict, Tuple
 from tqdm import tqdm
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 # This problem was an absolute headache. My solution is awful
 # and I just don't have the strength to optimise it any further!
@@ -144,7 +144,7 @@ def evaluate(message, cnf):
     return 0 in T[-1][0]
 
 @solution_timer(2020,19,1)
-def part_one(data):
+def part_one(data, verbose=False):
     rules, messages = parse(data)
     cnf = CNF(rules)
     
@@ -160,7 +160,7 @@ def replace(rules):
     return rules
 
 @solution_timer(2020,19,2)
-def part_two(data):
+def part_two(data, verbose=False):
     rules, messages = parse(data)
     rules = replace(rules)
     cnf = CNF(rules)

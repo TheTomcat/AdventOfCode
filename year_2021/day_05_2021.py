@@ -1,9 +1,9 @@
 from typing import List
 from collections import defaultdict
 
-from util.console import console
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.console import console
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2021,5)
 
@@ -53,7 +53,7 @@ def step_over(line, includ_diags=False):
             yield p1[0]+i, p1[1]+i*direction
 
 @solution_timer(2021,5,1)
-def part_one(data):
+def part_one(data, verbose=False):
     lines = parse(data)
     grid = defaultdict(int)
     for line in lines:
@@ -68,7 +68,7 @@ def part_one(data):
     return sum([1 for i in grid.values() if i > 1])
 
 @solution_timer(2021,5,2)
-def part_two(data):
+def part_two(data, verbose=False):
     lines = parse(data)
     grid = defaultdict(int)
     for line in lines:

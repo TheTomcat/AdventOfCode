@@ -1,8 +1,8 @@
 from collections import defaultdict
 from itertools import product
 from typing import List, Any, Tuple
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import window
 
 data = read_entire_input(2021,20)

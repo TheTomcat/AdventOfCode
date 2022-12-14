@@ -1,10 +1,10 @@
 from typing import List, Any, Tuple
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 from util.shared import render
-from util.graph import search, construct_path
-from util.console import console
+from util.graph.pathfinding import search, construct_path
+from framework.console import console
 
 data = read_entire_input(2022,12)
 test = """Sabqponm

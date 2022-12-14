@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,4)
 test="""ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
@@ -48,13 +48,13 @@ def is_valid_strict(passport):
 
 
 @solution_timer(2020,4,1)
-def part_one(data):
+def part_one(data, verbose=False):
     passports = parse(data)
     return sum([is_valid_lax(passport) for passport in passports])
 
 
 @solution_timer(2020,4,2)
-def part_two(data):
+def part_two(data, verbose=False):
     passports = parse(data)
     return sum([is_valid_lax(passport) and is_valid_strict(passport) for passport in passports])
 

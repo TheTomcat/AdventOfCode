@@ -2,9 +2,9 @@ import time
 from typing import List, Any, Tuple
 from collections import defaultdict
 
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
-from util.console import console
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
+from framework.console import console
 from util.shared import sgn
 from year_2019.intcode import IntCode, parse
 

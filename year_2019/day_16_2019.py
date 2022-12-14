@@ -2,8 +2,8 @@ from itertools import cycle
 from typing import List, Any, Tuple
 import math
 from tqdm import trange
-from util.helpers import solution_timer, solution_profiler
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer, solution_profiler
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2019,16)
 

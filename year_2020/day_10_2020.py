@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,10)
 
@@ -16,7 +16,7 @@ def make_chain(data):
     return diff
 
 @solution_timer(2020,10,1)
-def part_one(data):
+def part_one(data, verbose=False):
     adaptors = parse(data)
     chain = make_chain(adaptors)
     return chain.count(1) * chain.count(3)
@@ -50,7 +50,7 @@ def count(adaptors):
     return runs
 
 @solution_timer(2020,10,2)
-def part_two(data):
+def part_two(data, verbose=False):
     adaptors = parse(data)
     trib = {1:1, 2:2, 3:4, 4:7, 5:13, 6:24, 7:24+13+7}
 

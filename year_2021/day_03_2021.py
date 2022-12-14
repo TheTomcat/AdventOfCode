@@ -1,6 +1,6 @@
 from os import read
-from util.input_helper import read_entire_input, read_input_by_line
-from util.helpers import solution_timer
+from framework.input_helper import read_entire_input, read_input_by_line
+from framework.helpers import solution_timer
 
 def compute_power_consumption(data):
     counter = [0] * len(data[0])
@@ -48,11 +48,11 @@ def compute_life_support(data):
     return int(''.join(O2), base=2) * int(''.join(CO2), base=2)
 
 @solution_timer(2021,3,1)
-def part_one(data):
+def part_one(data, verbose=False):
     return compute_power_consumption(data)
 
 @solution_timer(2021,3,2)
-def part_two(data):
+def part_two(data, verbose=False):
     return compute_life_support(data)
 
 test_input = """00100

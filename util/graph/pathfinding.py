@@ -1,41 +1,6 @@
 from typing import Any, Dict, Optional, Sequence, Hashable, TypeVar, List, Tuple, Generic, Callable, Union
-import heapq as hq
-from collections import deque
 
-T = TypeVar('T')
-
-# Adapted largely from https://www.redblobgames.com/pathfinding/a-star/introduction.html
-# Amit Patel, Red Blob Games
-
-class PriorityQueue(Generic[T]):
-    """A priority queue.
-    """
-    def __init__(self, elements=None):
-        if elements is None:
-            elements = []
-        self.elements: List[Tuple[float, T]] = elements
-    def is_empty(self) -> bool:
-        return not self.elements
-    def put(self, item: T, priority: float):
-        hq.heappush(self.elements, (priority, item))
-    def get(self) -> T:
-        return hq.heappop(self.elements)[1]
-    def get_with_priority(self) -> Tuple[float, T]:
-        return hq.heappop(self.elements)
-    def __len__(self):
-        return len(self.elements)
-
-class Queue(Generic[T]):
-    def __init__(self):
-        self.elements = deque()
-    def is_empty(self) -> bool:
-        return not self.elements
-    def put(self, x: T):
-        self.elements.append(x)
-    def putleft(self, x: T):
-        self.elements.appendleft(x)
-    def get(self) -> T:
-        return self.elements.popleft()
+from util.graph.priorityqueue import PriorityQueue, Queue
 
 Node = Any
 Numeric = Union[int, float]
@@ -90,7 +55,6 @@ def A_star(start: Node, end: Node, neighbours: Neighbour, heuristic: Optional[He
     A heuristic is a function of the form f(Node1, Node2)->float
 
     Args:
-        graph (Graph): The graph object
         start (Node): The starting node
         end (Node): The ending node
         neighbour (f(Node)->[(Node, weight), (Node, weight), ...]: A function which returns the neighbours of a node

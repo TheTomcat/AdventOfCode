@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import window
 
 data = read_entire_input(2020,9)
@@ -27,12 +27,12 @@ def break_cipher(bits):
                 return min(bits[lower:lower+length]) + max(bits[lower:lower+length])
             
 @solution_timer(2020,9,1)
-def part_one(data):
+def part_one(data, verbose=False):
     bits = parse(data)
     return find_fault(bits)
 
 @solution_timer(2020,9,2)
-def part_two(data):
+def part_two(data, verbose=False):
     bits = parse(data)
     return break_cipher(bits)
 

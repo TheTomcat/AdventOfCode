@@ -1,11 +1,10 @@
 import enum
 from typing import List, Any, Tuple, TypeVar, Dict
 import math
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
-from util.console import console
-from util.shared import PriorityQueue
-
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
+from framework.console import console
+from util.graph.priorityqueue import PriorityQueue
 
 data = read_entire_input(2021,15)
 test = """1163751742
@@ -54,7 +53,7 @@ def a_star(data, start, goal):
     cost_so_far: Dict[Tuple[int,int], float] = {}
     came_from[start] = None
     cost_so_far[start] = 0
-    while not frontier.empty():
+    while not frontier.is_empty():
         current = frontier.get()
         #console.print(f"Examining point {current} - ", end="")
         if current == goal:

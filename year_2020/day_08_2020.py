@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,8)
 
@@ -34,7 +34,7 @@ def run(commands, start=0):
     return 0, accumulator
 
 @solution_timer(2020,8,1)
-def part_one(data):
+def part_one(data, verbose=False):
     commands = parse(data)
     return run(commands, 0)[1]
 
@@ -54,7 +54,7 @@ def alter_command(commands, command_index):
     return commands[0:command_index] + [(rep[commands[command_index][0]],commands[command_index][1])] + commands[command_index+1:]
 
 @solution_timer(2020,8,2)
-def part_two(data):
+def part_two(data, verbose=False):
     commands = parse(data)
     return find_corrupted_commands(commands)
 

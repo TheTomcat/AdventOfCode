@@ -1,7 +1,7 @@
 from collections import defaultdict
 
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,17)
 
@@ -115,14 +115,14 @@ def count(cubes):
     return count
 
 @solution_timer(2020,17,1)
-def part_one(data):
+def part_one(data, verbose=False):
     cubes = parse(data)
     for i in range(6):
         cubes = step(cubes)
     return count(cubes)
 
 @solution_timer(2020,17,2)
-def part_two(data):
+def part_two(data, verbose=False):
     cubes = parse(data, True)
     for i in range(6):
         cubes = step(cubes)

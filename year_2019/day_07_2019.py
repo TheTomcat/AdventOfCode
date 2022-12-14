@@ -1,8 +1,8 @@
 from typing import List, Any, Tuple
 from itertools import permutations
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
-from util.console import log
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
+from framework.console import log
 
 log.setLevel("INFO")
 

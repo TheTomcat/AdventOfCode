@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,3)
 test="""..##.......
@@ -40,12 +40,12 @@ def toboggan(grid, vec):
     return count
 
 @solution_timer(2020,3,1)
-def part_one(data):
+def part_one(data, verbose=False):
     grid = parse(data)
     return toboggan(grid, (3,1))
 
 @solution_timer(2020,3,2)
-def part_two(data):
+def part_two(data, verbose=False):
     vecs = [(1,1),(3,1),(5,1),(7,1),(1,2)]
     grid = parse(data)
     total = 1

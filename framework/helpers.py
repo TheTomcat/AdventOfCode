@@ -6,8 +6,8 @@ from typing import Callable, Dict, Any
 from functools import wraps
 
 from config import RUNNING_ALL
-from util.console import console
-from util.exceptions import SolutionNotFoundException
+from framework.console import console
+from framework.exceptions import SolutionNotFoundException
 
 
 # def _get_year_from_segment(segment: str) -> int:
@@ -58,10 +58,10 @@ def solution_timer(year: int, day: int, part: int, version: str = ''):  # noqa: 
 
                 diff = (time.perf_counter() - start) * 1000
                 console.print(f'{prefix}{solution} in {diff:.2f} ms')
+            except SolutionNotFoundException:
+                console.print(f'{prefix}[red]solution not found[/red]')
             except (ValueError, ArithmeticError, TypeError):
                 console.print_exception()
-            except SolutionNotFoundException:
-                console.print(f'{prefix}[red]solution not found')
             else:
                 return solution, diff
 

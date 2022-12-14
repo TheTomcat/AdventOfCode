@@ -1,10 +1,10 @@
 from collections import Counter
 from typing import List, Any, Tuple
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 from util.shared import SpiralIterator
-from util.console import console
+from framework.console import console
 
 data = read_entire_input(2018,6)
 test = """1, 1

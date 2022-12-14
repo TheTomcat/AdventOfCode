@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,5)
 test="""FBFBBFFRLR
@@ -25,12 +25,12 @@ def find_missing_seat(ids):
         expected_id+=1
 
 @solution_timer(2020,5,1)
-def part_one(data):
+def part_one(data, verbose=False):
     ids = parse(data)
     return max(ids)
 
 @solution_timer(2020,5,2)
-def part_two(data):
+def part_two(data, verbose=False):
     ids = parse(data)
     return find_missing_seat(sorted(ids))
 

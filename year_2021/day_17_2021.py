@@ -1,6 +1,6 @@
 from typing import List, Any, Tuple
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import sgn
 import re, math
 data = read_entire_input(2021,17)
@@ -80,7 +80,7 @@ def part_two(data: List[str], verbose=False):
                 state = step(state)
                 if all(within(state, bbox)):
                     c.add((vx,vy))
-    return c
+    return len(c)
     
 if __name__ == "__main__":
     data = read_entire_input(2021,17)

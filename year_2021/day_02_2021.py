@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import window
 
 def parse(data):
@@ -15,7 +15,7 @@ DEPTH = 1
 AIM = 2
 
 @solution_timer(2021,2,1)
-def part_one(data):
+def part_one(data, verbose=False):
     data = parse(data)
     position = [0,0]
     for direction, amount in data:
@@ -28,7 +28,7 @@ def part_one(data):
     return position[0] * position[1]
 
 @solution_timer(2021,2,2)
-def part_two(data):
+def part_two(data, verbose=False):
     data = parse(data)
     position = [0, 0, 0]
     for direction,amount in data:

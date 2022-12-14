@@ -1,7 +1,7 @@
 
-from util.input_helper import read_entire_input, read_input_by_line
-from util.console import log
-from util.helpers import solution_timer
+from framework.input_helper import read_entire_input, read_input_by_line
+from framework.console import log
+from framework.helpers import solution_timer
 
 data = read_entire_input(2020,23)
 test = ["389125467"]
@@ -25,7 +25,7 @@ def run_game_slice(initial_state, turns):
     return cups
 
 @solution_timer(2020,23,1)
-def part_one(data):
+def part_one(data, verbose=False):
     cups = parse(data)
     T = len(cups)
     cups = run_game_slice(cups, 100)
@@ -72,7 +72,7 @@ def run_game_linked_list(cups, selected_cup, up_to):
     return cups
 
 @solution_timer(2020,23,2)
-def part_two(data):
+def part_two(data, verbose=False):
     # Using the above approach is far too slow. Like, > 10 mins slow.
     # I think the slicing of the lists is the problem
     cups = parse(data)

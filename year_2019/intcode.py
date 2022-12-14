@@ -1,6 +1,6 @@
 from typing import List
 from collections import defaultdict, deque 
-from util.console import console
+from framework.console import console
 
 def parse(data: List[str]) -> List[int]:
     return [int(i) for i in data[0].split(',')]

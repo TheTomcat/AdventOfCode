@@ -1,5 +1,5 @@
 # Advent of Code ⭐️
-[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=162&color=yellow)]()
+[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=170&color=yellow)]()
 <!--[![codecov](https://codecov.io/gh/marcelblijleven/adventofcode/branch/master/graph/badge.svg?token=jZ2TgfyltM)](https://codecov.io/gh/marcelblijleven/adventofcode)
 [![tests](https://github.com/marcelblijleven/adventofcode/actions/workflows/tests.yaml/badge.svg)](https://github.com/marcelblijleven/adventofcode)
 [![version](https://img.shields.io/github/v/release/marcelblijleven/adventofcode.svg)](https://github.com/marcelblijleven/adventofcode/releases)
@@ -7,7 +7,7 @@
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
 <!-- Last updated -->
-Last updated 18:22 on Tuesday 13 December, 2022
+Last updated 16:16 on Wednesday 14 December, 2022
 <!-- End last updated -->
 
 <!-- start completed section -->
@@ -51,159 +51,165 @@ Last updated 18:22 on Tuesday 13 December, 2022
 - day 12: ⭐️ ⭐️
   - part one: 258.133ms
   - part two: 325.920ms
+- day 13: ⭐️ ⭐️
+  - part one: 12.395ms
+  - part two: 16.752ms
+- day 14: ⭐️ ⭐️
+  - part one: 27.938ms
+  - part two: 1239.518ms
 
 ### 2021
 
 - day 01: ⭐️ ⭐️
-  - part one: 0.251ms
-  - part two: 0.995ms
+  - part one: 0.250ms
+  - part two: 0.685ms
 - day 02: ⭐️ ⭐️
-  - part one: 0.361ms
-  - part two: 0.437ms
+  - part one: 0.337ms
+  - part two: 0.364ms
 - day 03: ⭐️ ⭐️
-  - part one: 1.085ms
-  - part two: 4.008ms
+  - part one: 1.016ms
+  - part two: 4.171ms
 - day 04: ⭐️ ⭐️
-  - part one: 20.196ms
-  - part two: 48.881ms
+  - part one: 17.429ms
+  - part two: 39.153ms
 - day 05: ⭐️ ⭐️
-  - part one: 53.067ms
-  - part two: 80.771ms
+  - part one: 38.232ms
+  - part two: 75.045ms
 - day 06: ⭐️ ⭐️
-  - part one: 771.258ms
-  - part two: 0.119ms
+  - part one: 747.499ms
+  - part two: 0.090ms
 - day 07: ⭐️ ⭐️
-  - part one: 127.984ms
-  - part two: 239.106ms
+  - part one: 119.777ms
+  - part two: 224.624ms
 - day 08: ⭐️ ⭐️
-  - part one: 1.581ms
-  - part two: 4.783ms
+  - part one: 1.167ms
+  - part two: 4.448ms
 - day 09: ⭐️ ⭐️
-  - part one: 18.341ms
-  - part two: 45.950ms
+  - part one: 15.322ms
+  - part two: 36.143ms
 - day 10: ⭐️ ⭐️
-  - part one: 0.627ms
-  - part two: 0.998ms
+  - part one: 0.611ms
+  - part two: 0.766ms
 - day 11: ⭐️ ⭐️
-  - part one: 13.628ms
-  - part two: 65.258ms
+  - part one: 12.219ms
+  - part two: 59.136ms
 - day 12: ⭐️ ⭐️
-  - part one: 69.833ms
-  - part two: 3250.930ms
+  - part one: 65.572ms
+  - part two: 2839.980ms
 - day 13: ⭐️ ⭐️
-  - part one: 0.592ms
-  - part two: 1.557ms
+  - part one: 0.562ms
+  - part two: 1.413ms
 - day 14: ⭐️ ⭐️
-  - part one: 1.009ms
-  - part two: 2.344ms
+  - part one: 0.512ms
+  - part two: 2.147ms
 - day 15: ⭐️ ⭐️
-  - part one: 55.130ms
-  - part two: 1886.889ms
+  - part one: 30.825ms
+  - part two: 1002.785ms
 - day 16: ⭐️ ⭐️
-  - part one: 4.746ms
-  - part two: 4.221ms
+  - part one: 3.550ms
+  - part two: 3.305ms
 - day 17: ⭐️ ⭐️
-  - part one: 69.075ms
-  - part two: 403.778ms
+  - part one: 32.422ms
+  - part two: 186.333ms
 - day 18: ⭐️ ⭐️
-  - part one: 127.374ms
-  - part two: 2595.371ms
+  - part one: 123.059ms
+  - part two: 2209.358ms
 - day 19:  -   - 
 - day 20: ⭐️ ⭐️
-  - part one: 54.194ms
-  - part two: 3278.884ms
+  - part one: 48.540ms
+  - part two: 2714.199ms
 - day 21:  -   - 
 - day 22: ⭐️ ⭐️
-  - part one: 33.989ms
-  - part two: 3089.573ms
+  - part one: 32.111ms
+  - part two: 2846.163ms
 - day 23: ⭐️ ⭐️
-  - part one: 22.319ms
-  - part two: 9590.331ms
+  - part one: 20.431ms
+  - part two: 8072.699ms
 - day 24:  -   - 
 
 ### 2020
 
 - day 01: ⭐️ ⭐️
-  - part one: 0.082ms
-  - part two: 16.269ms
+  - part one: 0.076ms
+  - part two: 15.664ms
 - day 02: ⭐️ ⭐️
-  - part one: 0.985ms
-  - part two: 0.960ms
+  - part one: 0.946ms
+  - part two: 0.852ms
 - day 03: ⭐️ ⭐️
-  - part one: 0.160ms
-  - part two: 0.229ms
+  - part one: 0.145ms
+  - part two: 0.383ms
 - day 04: ⭐️ ⭐️
-  - part one: 0.887ms
-  - part two: 1.491ms
+  - part one: 0.941ms
+  - part two: 1.329ms
 - day 05: ⭐️ ⭐️
-  - part one: 0.760ms
-  - part two: 0.909ms
+  - part one: 0.727ms
+  - part two: 0.920ms
 - day 06: ⭐️ ⭐️
-  - part one: 3.941ms
-  - part two: 2.763ms
+  - part one: 2.870ms
+  - part two: 3.437ms
 - day 07: ⭐️ ⭐️
-  - part one: 2.328ms
-  - part two: 1.571ms
+  - part one: 2.153ms
+  - part two: 1.931ms
 - day 08: ⭐️ ⭐️
-  - part one: 0.480ms
-  - part two: 31.339ms
+  - part one: 0.421ms
+  - part two: 27.949ms
 - day 09: ⭐️ ⭐️
-  - part one: 0.950ms
-  - part two: 238.474ms
+  - part one: 0.871ms
+  - part two: 202.521ms
 - day 10: ⭐️ ⭐️
-  - part one: 0.039ms
-  - part two: 0.039ms
+  - part one: 0.042ms
+  - part two: 0.053ms
 - day 11: ⭐️ ⭐️
-  - part one: 2057.091ms
-  - part two: 3748.147ms
+  - part one: 2183.377ms
+  - part two: 4271.628ms
 - day 12: ⭐️ ⭐️
-  - part one: 0.370ms
-  - part two: 0.425ms
+  - part one: 0.409ms
+  - part two: 0.600ms
 - day 13: ⭐️ ⭐️
-  - part one: 0.019ms
-  - part two: 0.034ms
+  - part one: 0.018ms
+  - part two: 0.026ms
 - day 14: ⭐️ ⭐️
-  - part one: 2.051ms
-  - part two: 395.803ms
+  - part one: 2.240ms
+  - part two: 361.942ms
 - day 15: ⭐️ ⭐️
-  - part one: 0.611ms
-  - part two: 18590.285ms
+  - part one: 0.686ms
+  - part two: 18550.556ms
 - day 16: ⭐️ ⭐️
-  - part one: 33.380ms
-  - part two: 55.497ms
+  - part one: 21.145ms
+  - part two: 30.940ms
 - day 17: ⭐️ ⭐️
-  - part one: 73.180ms
-  - part two: 2321.613ms
+  - part one: 73.440ms
+  - part two: 2446.017ms
 - day 18: ⭐️ ⭐️
-  - part one: 4.820ms
-  - part two: 5.373ms
+  - part one: 4.616ms
+  - part two: 5.736ms
 - day 19: ⭐️ ⭐️
-  - part one: 94383.492ms
-  - part two: 93849.770ms
+  - part one: 109135.621ms
+  - part two: 108606.035ms
 - day 20: ⭐️ ⭐️
-  - part one: 457.594ms
-  - part two: 528.202ms
+  - part one: 415.449ms
+  - part two: 509.109ms
 - day 21: ⭐️ ⭐️
-  - part one: 0.504ms
-  - part two: 0.458ms
+  - part one: 0.518ms
+  - part two: 0.640ms
 - day 22: ⭐️ ⭐️
-  - part one: 0.126ms
-  - part two: 17088.848ms
+  - part one: 0.148ms
+  - part two: 16177.330ms
 - day 23: ⭐️ ⭐️
-  - part one: 0.097ms
-  - part two: 8624.307ms
+  - part one: 0.091ms
+  - part two: 9064.120ms
 - day 24: ⭐️ ⭐️
-  - part one: 2.431ms
-  - part two: 5365.277ms
+  - part one: 2.660ms
+  - part two: 5487.433ms
 - day 25: ⭐️ ⭐️
-  - part one: 4.940ms
-  - part two: 0.005ms
+  - part one: 4.694ms
+  - part two: 0.003ms
 
 ### 2019
 
 - day 01: ⭐️ ⭐️
-  - part one: 0.045ms
-  - part two: 0.304ms
+  - part one: 0.041ms
+  - part two: 0.322ms
 - day 02: ⭐️ ⭐️
   - part one: 0.034ms
   - part two: 101.657ms
@@ -274,5 +280,11 @@ Last updated 18:22 on Tuesday 13 December, 2022
 - day 06: ⭐️ ⭐️
   - part one: 1955.412ms
   - part two: 1424.757ms
+- day 07: ⭐️ ⭐️
+  - part one: 3.051ms
+  - part two: 27.239ms
+- day 08: ⭐️ ⭐️
+  - part one: 6.600ms
+  - part two: 5.591ms
 
 <!-- end completed section -->

@@ -59,6 +59,14 @@ python-versions = "*"
 test = ["flake8 (==3.7.8)", "hypothesis (==3.55.3)"]
 
 [[package]]
+name = "disjoint-set"
+version = "0.7.3"
+description = "Disjoint set data structure implementation for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "idna"
 version = "3.3"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -219,7 +227,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "fe2167daa3e8d277596b656c0ca56729bd7fc689e4dfd9b90f39612159396a11"
+content-hash = "f57b52f255bdc71d5a7d6bdb3af3e811d6162f6bba8eca5318192e24b3bb8fe6"
 
 [metadata.files]
 atomicwrites = [
@@ -245,6 +253,10 @@ colorama = [
 commonmark = [
     {file = "commonmark-0.9.1-py2.py3-none-any.whl", hash = "sha256:da2f38c92590f83de410ba1a3cbceafbc74fee9def35f9251ba9a971d6d66fd9"},
     {file = "commonmark-0.9.1.tar.gz", hash = "sha256:452f9dc859be7f06631ddcb328b6919c67984aca654e5fefb3914d54691aed60"},
+]
+disjoint-set = [
+    {file = "disjoint_set-0.7.3-py3-none-any.whl", hash = "sha256:bf2c6b3a2bd614d67d17c45f15a8b3946c0a0b99b4c04f92a195128c5b1e6351"},
+    {file = "disjoint_set-0.7.3.tar.gz", hash = "sha256:cc09320b35d5a5bb36ceba86ab885b073340d0ba05cd92e9bd413fbea026162a"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},

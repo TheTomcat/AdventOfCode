@@ -1,5 +1,5 @@
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,16)
 
@@ -49,7 +49,7 @@ def calculate_error_rate(other_tickets, rule_dict):
     return count
 
 @solution_timer(2020,16,1)
-def part_one(data):
+def part_one(data, verbose=False):
     rule_dict, my_ticket, other_tickets = parse(data)
     return calculate_error_rate(other_tickets, rule_dict)
 
@@ -84,7 +84,7 @@ def assign_fields(other_tickets, rule_dict):
     return mapping
 
 @solution_timer(2020,16,2)
-def part_two(data):
+def part_two(data, verbose=False):
     rule_dict, my_ticket, other_tickets = parse(data)
     mapping = assign_fields(other_tickets, rule_dict)
     val = 1

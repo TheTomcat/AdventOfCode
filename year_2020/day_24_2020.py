@@ -1,8 +1,8 @@
 from typing import DefaultDict, Iterator, List, Any, Tuple
 from collections import defaultdict
 from itertools import chain
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import window
 
 data = read_entire_input(2020,24)

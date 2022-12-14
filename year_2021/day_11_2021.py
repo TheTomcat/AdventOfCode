@@ -1,9 +1,9 @@
 from typing import List, Any, Tuple
 from collections import deque
 from itertools import product
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
-from util.console import console
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
+from framework.console import console
 
 data = read_entire_input(2021,11)
 test = """5483143223

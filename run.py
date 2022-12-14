@@ -2,10 +2,10 @@ import sys
 import os
 from typing import List, Tuple, Union
 from argparse import ArgumentParser
-from util.input_helper import read_entire_input
-from util.make_readme import (append_new_run_times, _create_completed_text, generate_readme, 
+from framework.input_helper import read_entire_input
+from framework.make_readme import (append_new_run_times, _create_completed_text, generate_readme, 
             _find_completed_days, get_full_day_paths, get_full_year_paths, get_year_and_day_from_day_path)
-from util.console import console
+from framework.console import console
 from config import ROOT_DIR
 
 def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: int):
@@ -17,9 +17,12 @@ def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: 
     try:
         module = __import__(f"year_{year}.day_{day:02}_{year}", fromlist=['object'])
     except ModuleNotFoundError as e:
-        console.print(f"[red]There was no solution found for problem {day} from {year}[/red]")
-        console.print(f"[yellow]Attempting to create template solution...[/yellow]")
-        create_day(year, day)
+        if f"year_{year}.day_{day:02}_{year}" in e.msg:
+            console.print(f"[red]There was no solution found for problem {day} from {year}[/red]")
+            console.print(f"[yellow]Attempting to create template solution...[/yellow]")
+            create_day(year, day)
+        else:
+            raise e
         return
     if test:
         try:
@@ -32,13 +35,13 @@ def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: 
     
     try:
         r1, p1 = getattr(module, 'part_one')(data, verbose)
-    except AttributeError:
-        pass
+    except AttributeError as e:
+        raise e
 
     try:
         r2, p2 = getattr(module, 'part_two')(data, verbose)
-    except AttributeError:
-        pass
+    except AttributeError as e:
+        raise e
 
     if not test:
         append_new_run_times(r1,p1,r2,p2,day,year)

@@ -1,7 +1,7 @@
 from typing import List, Any, Tuple
 from collections import deque
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from year_2021.day_08_2021 import read_output
 
 

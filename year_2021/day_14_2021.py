@@ -1,8 +1,8 @@
 from itertools import count
 from typing import DefaultDict, Dict, List, Any, Tuple
 from collections import Counter, defaultdict
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 from util.shared import window
 
 data = read_entire_input(2021,14)

@@ -1,8 +1,8 @@
 from collections import deque
 
-from util.input_helper import read_entire_input, read_input_by_line
-from util.console import log
-from util.helpers import solution_timer
+from framework.input_helper import read_entire_input, read_input_by_line
+from framework.console import log
+from framework.helpers import solution_timer
 
 data = read_entire_input(2020,22)
 
@@ -103,7 +103,7 @@ def play_all_recursive_combat(a: deque,b: deque):
 
 
 @solution_timer(2020,22,1)
-def part_one(data):
+def part_one(data, verbose=False):
     a,b = parse(data)
     round = 1
     while len(a) * len(b) != 0:
@@ -113,7 +113,7 @@ def part_one(data):
     return score(a,b)
 
 @solution_timer(2020,22,2)
-def part_two(data):
+def part_two(data, verbose=False):
     a_deck,b_deck = parse(data)
     log.setLevel("ERROR")
     winner, A, B = play_all_recursive_combat(a_deck, b_deck)

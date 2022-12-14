@@ -1,7 +1,7 @@
 from collections import defaultdict
 from tqdm import trange
-from util.helpers import solution_timer
-from util.input_helper import read_entire_input
+from framework.helpers import solution_timer
+from framework.input_helper import read_entire_input
 
 data = read_entire_input(2020,15)
 test = "11,18,0,20,1,7,16"
@@ -32,13 +32,13 @@ def play(start_nums, end_turn):
     return spoken_num
 
 @solution_timer(2020,15,1)
-def part_one(data):
+def part_one(data, verbose=False):
     starting_numbers = parse(data)
     return play(starting_numbers, 2020)    
 
 
 @solution_timer(2020,15,2)
-def part_two(data):
+def part_two(data, verbose=False):
     starting_numbers = parse(data)
     return play(starting_numbers, 30000000)    
 
