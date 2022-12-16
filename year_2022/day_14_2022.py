@@ -53,6 +53,7 @@ class Rockface:
         self.space = {(x,y):'#' for wall in walls for x,y in wall}
         self.origin = origin
         self.space[origin] = '+'
+        self.mrd = (500,0)
     def drop(self):
         x,y = self.origin
         while self.X[0] <= x <= self.X[1] and self.Y[0] <= y <= self.Y[1]:
@@ -64,6 +65,7 @@ class Rockface:
                     break
             else:
                 self.space[(x,y)] = "o"
+                self.mrd = (x,y)
                 return x,y
                 # settle
         else:
@@ -89,12 +91,16 @@ class Rockface:
             for x in range(self.X[0], self.X[1]+1):
                 if (x,y) in self.space:
                     v = self.space[(x,y)]
-                    if v == 'o':
-                        console.print(f'[yellow]{v}[/yellow]', end='')
+                    c = 'grey'
+                    if (x,y) == self.mrd:
+                        c = 'blue'
+                    elif v == 'o':
+                        c='yellow'  
                     elif v=='+':
-                        console.print(f'[white]{self.space[(x,y)]}[/white]', end='')
+                        c = 'green'
                     else:
-                        console.print(f'[red]{self.space[(x,y)]}[/red]', end='')
+                        c = 'red'
+                    console.print(f'[{c}]{v}[/{c}]', end='')
                 else:
                     console.print('.', end='')
             print()

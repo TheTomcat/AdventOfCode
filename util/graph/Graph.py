@@ -100,11 +100,11 @@ class Graph(object):
     # def select_node(self) -> Node:
     #     """Select a random node from this graph"""
     #     return next(iter(self._nodes.values()))
-    def add_node(self, id: ID) -> Node:
+    def add_node(self, id: ID, payload=None) -> Node:
         "Create a node by ID and add it to the graph. Return the new node. If it already exists, return that node"
         if id in self._nodes:
             return self._nodes[id]
-        n = Node(id)
+        n = Node(id, payload=payload)
         self._nodes[id] = n
         return n
     def get_node(self, id: ID) -> Node:

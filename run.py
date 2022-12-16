@@ -8,6 +8,11 @@ from framework.make_readme import (append_new_run_times, _create_completed_text,
 from framework.console import console
 from config import ROOT_DIR
 
+# def import_module(year, day):
+#     try:
+#         module = __import__(f"year_{year}.day_{day:02}_{year}", fromlist=['object'])
+#     except ModuleNotFoundError as e:
+
 def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: int):
     """
     Runs given days solution
