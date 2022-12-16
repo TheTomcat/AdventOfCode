@@ -4,7 +4,7 @@ import math
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
 from framework.console import console
-from util.graph.priorityqueue import PriorityQueue
+from lib.graph.priorityqueue import PriorityQueue
 
 data = read_entire_input(2021,15)
 test = """1163751742

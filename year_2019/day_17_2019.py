@@ -5,7 +5,7 @@ from typing import Dict, List, Any, Tuple
 import time
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import window, render, PointDict, Point
+from lib.iterators import window, render, PointDict, Point
 from framework.console import console
 from year_2019.intcode import IntCode, parse
 

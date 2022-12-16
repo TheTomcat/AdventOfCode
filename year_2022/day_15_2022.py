@@ -7,7 +7,7 @@ import re
 import math
 import tqdm
 
-from util.shared import overlap
+from lib.shared import overlap
 
 data = read_entire_input(2022,15)
 test = """Sensor at x=2, y=18: closest beacon is at x=-2, y=15

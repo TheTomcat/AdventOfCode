@@ -1,7 +1,7 @@
 from typing import List, Tuple
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import window, overlap
+from lib.iterators import window, overlap
 
 data = read_entire_input(2019,3)
 test="""R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51

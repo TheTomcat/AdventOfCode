@@ -3,7 +3,7 @@ from typing import DefaultDict, Dict, List, Any, Tuple
 from collections import Counter, defaultdict
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import window
+from lib.iterators import window
 
 data = read_entire_input(2021,14)
 test = """NNCB

@@ -5,7 +5,7 @@ from itertools import accumulate, islice, product
 
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import transpose
+from lib.shared import transpose
 
 data = read_entire_input(2020,20)
 

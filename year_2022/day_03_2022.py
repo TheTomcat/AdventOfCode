@@ -2,7 +2,7 @@ from typing import List, Any, Tuple
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
 
-from util.shared import grouper
+from lib.iterators import grouper
 
 data = read_entire_input(2022,3)
 test = """vJrwpWtwJgWrhcsFMMfFFhFp

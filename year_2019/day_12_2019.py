@@ -3,7 +3,7 @@ import re
 from itertools import product
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import sgn
+from lib.shared import sgn
 
 data = read_entire_input(2019,12)
 test = """<x=-1, y=0, z=2>

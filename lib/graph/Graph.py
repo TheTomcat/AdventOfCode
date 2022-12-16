@@ -6,7 +6,7 @@ from functools import total_ordering
 
 import math
 
-from util.graph.pathfinding import search as _search, A_star as _a_star
+from lib.graph.pathfinding import search as _search, A_star as _a_star
 
 #import disjoint_set
 

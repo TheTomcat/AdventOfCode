@@ -3,9 +3,9 @@ from typing import List, Any, Tuple
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
 
-from util.graph.Graph import Graph, Node, ID
-from util.graph.algorithms import floyd_warshall
-from util.graph.priorityqueue import PriorityQueue
+from lib.graph.Graph import Graph, Node, ID
+from lib.graph.algorithms import floyd_warshall
+from lib.graph.priorityqueue import PriorityQueue
 
 from framework.console import console
 

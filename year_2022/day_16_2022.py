@@ -4,9 +4,9 @@ from typing import Dict, List, Any, Tuple
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
 
-from util.graph.Graph import Graph, ID
-from util.graph.algorithms import floyd_warshall_with_path, reconstruct_shortest_path, Node
-from util.graph.priorityqueue import PriorityQueue
+from lib.graph.Graph import Graph, ID
+from lib.graph.algorithms import floyd_warshall_with_path, reconstruct_shortest_path, Node
+from lib.graph.priorityqueue import PriorityQueue
 
 data = read_entire_input(2022,16)
 test = """Valve AA has flow rate=0; tunnels lead to valves DD, II, BB

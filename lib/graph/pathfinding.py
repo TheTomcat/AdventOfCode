@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Sequence, Hashable, TypeVar, List, Tuple, Generic, Callable, Union
 
-from util.graph.priorityqueue import PriorityQueue, Queue
+from lib.graph.priorityqueue import PriorityQueue, Queue
 
 Node = Any
 Numeric = Union[int, float]

@@ -1,7 +1,7 @@
 from typing import List, Any, Tuple
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import sgn
+from lib.shared import sgn
 import re, math
 data = read_entire_input(2021,17)
 test = ["target area: x=20..30, y=-10..-5"]

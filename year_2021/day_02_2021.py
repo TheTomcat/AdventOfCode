@@ -1,6 +1,6 @@
 from framework.helpers import solution_timer
 from framework.input_helper import read_entire_input
-from util.shared import window
+from lib.iterators import window
 
 def parse(data):
     output = []

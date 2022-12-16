@@ -1,6 +1,6 @@
 from framework.input_helper import read_entire_input, read_input_by_line
 from framework.helpers import solution_timer
-from util.shared import window, transpose
+from lib.iterators import window, transpose
 
 data = read_entire_input(2021,4)
 

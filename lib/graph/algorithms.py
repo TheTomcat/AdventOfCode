@@ -3,8 +3,8 @@ from typing import Dict, Optional, Tuple
 
 import disjoint_set
 
-from util.graph.Graph import Graph, Node, ID, GraphError
-from util.graph.priorityqueue import PriorityQueue
+from lib.graph.Graph import Graph, Node, ID, GraphError
+from lib.graph.priorityqueue import PriorityQueue
 
 def floyd_warshall(g: Graph) -> Dict[ID, Dict[ID,float]]:
     "length of shortest paths between all the pairs of vertices in a directed weighted graph "
