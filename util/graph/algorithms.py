@@ -27,10 +27,10 @@ def floyd_warshall_with_path(g: Graph):
     next: Dict[ID, Dict[ID, Optional[Node]]] = {n:{m:None for m,_ in g.nodes()} for n,_ in g.nodes()}
     for n1,n2,w in g.edges():
         dist[n1.id][n2.id] = w
-        next[n1.id][n2.id] = n2
+        next[n1.id][n2.id] = n2.id
     for _,n in g.nodes():
         dist[n.id][n.id] = 0
-        next[n.id][n.id] = n
+        next[n.id][n.id] = n.id
     for k,_ in g.nodes():
         for i,_ in g.nodes():
             for j,_ in g.nodes():
@@ -38,7 +38,17 @@ def floyd_warshall_with_path(g: Graph):
                     dist[i][j] = dist[i][k] + dist[k][j]
                     next[i][j] = next[i][k]
 
-    return dist, next
+    return dist, next # 'next' is the floyd_warshall_path used in reconstruct_shortest_path
+
+def reconstruct_shortest_path(start, finish, floyd_warshall_path):
+    if floyd_warshall_path[start][finish] is None:
+        return []
+    node = start
+    path = [start]
+    while node != finish:
+        node = floyd_warshall_path[node][finish]
+        path.append(node)
+    return path
 
 def prim_MST(g: Graph, start: Node) -> Tuple[Graph, float]:
     "Construct Prim Minimum Spanning Tree"

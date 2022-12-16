@@ -202,13 +202,23 @@ class Graph(object):
         return g
     
     @classmethod
-    def from_adjacency_list(cls, adj_list: Dict[str,Sequence], weighted: bool=True, directed:bool=True) -> 'Graph':
+    def from_adjacency_list(cls, adj_list: Dict[str,Sequence], weighted: bool=False, directed:bool=False) -> 'Graph':
+        """Create a graph from a supplied adjacency list (but actually a dictionary...)
+
+        Args:
+            adj_list (Dict[str,Sequence]): The adjacency list. 
+            weighted (bool, optional): _description_. Defaults to False. If weighted, then the weights should be the second item along with the node as a tuple. 
+            directed (bool, optional): _description_. Defaults to False.
+
+        Returns:
+            Graph: _description_
+        """
         g = cls(weighted=weighted, directed=directed)
         for node, adjacents in adj_list.items():
             g.add_node(node)
             if isinstance(adjacents, dict):
-                loop_over: Union[ItemsView,list] = adjacents.items()
-            elif isinstance(adjacents, list):
+                loop_over: Union[ItemsView,list, tuple] = adjacents.items()
+            elif isinstance(adjacents, (list, tuple)):
                 loop_over = adjacents
             for e in loop_over:
                 if weighted:
