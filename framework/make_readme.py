@@ -99,8 +99,8 @@ def _create_completed_text() -> str:
         text.append(f'\n### {year}\n')
 
         for day, parts in days.items():
-            part_one_star = '⭐️' if parts and parts[1] else ' - '
-            part_two_star = '⭐️' if parts and parts[2] else ' - '
+            part_one_star = '⭐️' if parts and 1 in parts and parts[1] else ' - '
+            part_two_star = '⭐️' if parts and 2 in parts and parts[2] else ' - '
             part_one_time = f'\n  - part one: {parts[1]:.3f}ms' if part_one_star != " - " else ""
             part_two_time = f'\n  - part two: {parts[2]:.3f}ms' if part_two_star != " - " else ""
             text.append(f'- day {day:02}: {part_one_star} {part_two_star}{part_one_time}{part_two_time}')
@@ -191,10 +191,11 @@ def _find_completed_days(rerun=None):
             except KeyError as e:
                 p2 = None
 
-            if p1 is None or p2 is None or rerun is True or (rerun and (year,day) in rerun):
-                module = get_module(year, day)
-                p1, p2 = time_module(module, year, day)
-                changed = True
+            if False: # THIS CODE MIGHT NOT BE NECESSARY? 
+                if p1 is None or p2 is None or rerun is True or (rerun and (year,day) in rerun):
+                    module = get_module(year, day)
+                    p1, p2 = time_module(module, year, day)
+                    changed = True
 
             # print(f"{day}, ",end="")
             # print(p1,p2)

@@ -4,7 +4,8 @@ from framework.input_helper import read_entire_input
 
 from framework.console import console
 
-from lib.iterators import window, sgn
+from lib.iterators import window
+from lib.shared import sgn
 
 data = read_entire_input(2022,14)
 test = """498,4 -> 498,6 -> 496,6

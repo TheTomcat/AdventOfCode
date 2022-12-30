@@ -35,7 +35,7 @@ def search(start, neighbours: Neighbour, end: EndCondition=None, depth_first=Fal
     #print(f'Starting {"depth" if depth_first else "bredth"}-first search...')
     while not queue.is_empty():
         current = queue.get()
-        #print(current.id, end=" ")
+        #print(current, end=" ")
         for neighbour, weight in neighbours(current):
 
             if neighbour not in visited_from:

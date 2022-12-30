@@ -8,17 +8,13 @@ from framework.make_readme import (append_new_run_times, _create_completed_text,
 from framework.console import console
 from config import ROOT_DIR
 
-# def import_module(year, day):
-#     try:
-#         module = __import__(f"year_{year}.day_{day:02}_{year}", fromlist=['object'])
-#     except ModuleNotFoundError as e:
-
 def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: int):
     """
     Runs given days solution
     """
     
     console.print(f"[green]Attempting to run the solution to problem {day} from {year}...")
+
     try:
         module = __import__(f"year_{year}.day_{day:02}_{year}", fromlist=['object'])
     except ModuleNotFoundError as e:
@@ -76,11 +72,6 @@ def run():
             #console.print(f"Attempting to run problem {year}-{day}")
             run_day(year, day, verbose=verbose)
         return
-    #     year_paths = get_full_year_paths()
-    #     pass # run every problem - this will take a long time so alert the user?
-    #     return
-    # if day == '.':
-        
 
     if day is not None:
         if day > 25:
@@ -137,7 +128,6 @@ def _parse_args(args: List[str]) -> Tuple[int, int]:
     parser.add_argument('day', type=opt_int, help='The day of the exercise', )
     parser.add_argument('-t', '--test', action='store_true')
     parser.add_argument('-v', '--verbose', action='store_true')
-    #parser.add_argument('quiet', type=int, help='Suppress errors', default=False)
     parsed = parser.parse_intermixed_args(args)
     return parsed.year, parsed.day, parsed.test, parsed.verbose#, parsed.quiet
 

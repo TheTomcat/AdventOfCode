@@ -3,6 +3,7 @@ from framework.helpers import solution_profiler, solution_timer
 from framework.input_helper import read_entire_input
 
 from framework.console import console
+from lib.linkedlist import Node
 
 import operator
 
@@ -52,65 +53,65 @@ def play(num_players, last_marble_point, verbose=False):
             input()
     return points
 
-class Node:
-    def __init__(self, val, circular_list=False):#, head=None, tail= None):
-        self.value = val
-        if circular_list:
-            pointer = self
-        else:
-            pointer = None
-        self.next: Node = pointer
-        self.prev: Node = pointer
-        # if head is None:
-        #     self.head: Node = pointer
-        # if tail is None:
-        #     self.tail: Node = pointer
-    def insert_after(self, val):
-        b = Node(val)
-        c = self.next
-        if c is not None:
-            c.prev = b        
-        b.prev = self
-        b.next = c
-        self.next = b
-        return b
-    def insert_before(self, val):
-        b = Node(val)
-        a = self.prev
-        if a is not None:
-            a.next = b        
-        b.prev = a
-        b.next = self
-        self.prev = b
-        return b
-    def delete(self):
-        a, c = self.prev, self.next
-        if a is not None:
-            a.next = c
-        if c is not None:
-            c.prev = a
-        return self.value
-    def get_offset(self, offset):
-        if offset == 0:
-            return self
-        elif offset > 0:
-            if self.next is not None:
-                return self.next.get_offset(offset-1)
-        elif offset < 0:
-            if self.prev is not None:
-                return self.prev.get_offset(offset+1)
-    def __iter__(self):
-        start = self
-        yield self
-        node = start.next
-        while node != start:
-            yield node
-            if node.next is not None:
-                node = node.next
-            else:
-                break
-    def __repr__(self):
-        return f'Node({self.value})'#f'[' + (f'..., Node({self.prev.value}), ' if self.prev is not None else '') + f'Node({self.value})' + (f', Node({self.next.value}), ...' if self.next is not None else '') + ']'
+# class Node:
+#     def __init__(self, val, circular_list=False):#, head=None, tail= None):
+#         self.value = val
+#         if circular_list:
+#             pointer = self
+#         else:
+#             pointer = None
+#         self.next: Node = pointer
+#         self.prev: Node = pointer
+#         # if head is None:
+#         #     self.head: Node = pointer
+#         # if tail is None:
+#         #     self.tail: Node = pointer
+#     def insert_after(self, val):
+#         b = Node(val)
+#         c = self.next
+#         if c is not None:
+#             c.prev = b        
+#         b.prev = self
+#         b.next = c
+#         self.next = b
+#         return b
+#     def insert_before(self, val):
+#         b = Node(val)
+#         a = self.prev
+#         if a is not None:
+#             a.next = b        
+#         b.prev = a
+#         b.next = self
+#         self.prev = b
+#         return b
+#     def delete(self):
+#         a, c = self.prev, self.next
+#         if a is not None:
+#             a.next = c
+#         if c is not None:
+#             c.prev = a
+#         return self.value
+#     def get_offset(self, offset):
+#         if offset == 0:
+#             return self
+#         elif offset > 0:
+#             if self.next is not None:
+#                 return self.next.get_offset(offset-1)
+#         elif offset < 0:
+#             if self.prev is not None:
+#                 return self.prev.get_offset(offset+1)
+#     def __iter__(self):
+#         start = self
+#         yield self
+#         node = start.next
+#         while node != start:
+#             yield node
+#             if node.next is not None:
+#                 node = node.next
+#             else:
+#                 break
+#     def __repr__(self):
+#         return f'Node({self.value})'#f'[' + (f'..., Node({self.prev.value}), ' if self.prev is not None else '') + f'Node({self.value})' + (f', Node({self.next.value}), ...' if self.next is not None else '') + ']'
 
 # class DoublyLinkedList:
 #     def __init__(self, nodes: List=None):

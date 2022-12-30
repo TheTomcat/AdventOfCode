@@ -1,5 +1,5 @@
 # Advent of Code ⭐️
-[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=174&color=yellow)]()
+[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=187&color=yellow)]()
 <!--[![codecov](https://codecov.io/gh/marcelblijleven/adventofcode/branch/master/graph/badge.svg?token=jZ2TgfyltM)](https://codecov.io/gh/marcelblijleven/adventofcode)
 [![tests](https://github.com/marcelblijleven/adventofcode/actions/workflows/tests.yaml/badge.svg)](https://github.com/marcelblijleven/adventofcode)
 [![version](https://img.shields.io/github/v/release/marcelblijleven/adventofcode.svg)](https://github.com/marcelblijleven/adventofcode/releases)
@@ -7,7 +7,7 @@
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
 <!-- Last updated -->
-Last updated 15:59 on Friday 16 December, 2022
+Last updated 18:28 on Thursday 29 December, 2022
 <!-- End last updated -->
 
 <!-- start completed section -->
@@ -16,50 +16,72 @@ Last updated 15:59 on Friday 16 December, 2022
 ### 2022
 
 - day 01: ⭐️ ⭐️
-  - part one: 2.467ms
-  - part two: 2.568ms
+  - part one: 2.094ms
+  - part two: 2.265ms
 - day 02: ⭐️ ⭐️
-  - part one: 1.845ms
-  - part two: 1.685ms
+  - part one: 1.240ms
+  - part two: 2.527ms
 - day 03: ⭐️ ⭐️
-  - part one: 0.499ms
-  - part two: 0.552ms
+  - part one: 0.519ms
+  - part two: 0.480ms
 - day 04: ⭐️ ⭐️
-  - part one: 1.621ms
-  - part two: 1.469ms
+  - part one: 1.562ms
+  - part two: 1.785ms
 - day 05: ⭐️ ⭐️
-  - part one: 1.484ms
-  - part two: 1.331ms
+  - part one: 1.450ms
+  - part two: 0.996ms
 - day 06: ⭐️ ⭐️
-  - part one: 0.464ms
-  - part two: 1.430ms
+  - part one: 0.711ms
+  - part two: 1.468ms
 - day 07: ⭐️ ⭐️
-  - part one: 0.731ms
-  - part two: 0.827ms
+  - part one: 0.762ms
+  - part two: 1.254ms
 - day 08: ⭐️ ⭐️
-  - part one: 412.886ms
-  - part two: 35.958ms
+  - part one: 331.563ms
+  - part two: 36.916ms
 - day 09: ⭐️ ⭐️
-  - part one: 18.670ms
-  - part two: 66.656ms
+  - part one: 30.450ms
+  - part two: 92.570ms
 - day 10: ⭐️ ⭐️
-  - part one: 0.119ms
-  - part two: 0.260ms
+  - part one: 0.145ms
+  - part two: 0.219ms
 - day 11: ⭐️ ⭐️
-  - part one: 1.213ms
-  - part two: 390.573ms
+  - part one: 5.823ms
+  - part two: 370.982ms
 - day 12: ⭐️ ⭐️
-  - part one: 258.133ms
-  - part two: 325.920ms
+  - part one: 27.693ms
+  - part two: 21.276ms
 - day 13: ⭐️ ⭐️
-  - part one: 12.395ms
-  - part two: 16.752ms
+  - part one: 12.798ms
+  - part two: 17.380ms
 - day 14: ⭐️ ⭐️
-  - part one: 27.938ms
-  - part two: 1239.518ms
+  - part one: 28.950ms
+  - part two: 1207.965ms
 - day 15: ⭐️ ⭐️
-  - part one: 0.372ms
-  - part two: 60426.089ms
+  - part one: 0.602ms
+  - part two: 54089.547ms
+- day 16: ⭐️  - 
+  - part one: 7526.368ms
+- day 17: ⭐️  - 
+  - part one: 33.804ms
+- day 18: ⭐️ ⭐️
+  - part one: 2.444ms
+  - part two: 47.598ms
+- day 19:  -   - 
+- day 20: ⭐️ ⭐️
+  - part one: 527.116ms
+  - part two: 5935.858ms
+- day 21: ⭐️ ⭐️
+  - part one: 1.514ms
+  - part two: 4.547ms
+- day 22: ⭐️ ⭐️
+  - part one: 16.805ms
+  - part two: 16.531ms
+- day 23: ⭐️ ⭐️
+  - part one: 181.126ms
+  - part two: 13887.243ms
+- day 25: ⭐️  - 
+  - part one: 0.153ms
 
 ### 2021
 

@@ -42,7 +42,11 @@ def render(points: PointDict, flipy=False, render_function=None):
         render function should be f(Tuple[int,int], Dict[Tuple[int,int]]) -> str
     """
     if render_function is None:
-        render_function = lambda p, points: chr(9608) if p in points else ' '
+        rf = lambda p, points: chr(9608) if p in points else ' '
+    elif isinstance(render_function, tuple):
+        rf = lambda p, points: render_function[0] if p in points else render_function[1]
+    else:
+        rf = render_function
     xmin = min(i[0] for i in points)
     xmax = max(i[0] for i in points)
     ymin = min(i[1] for i in points)
@@ -51,5 +55,5 @@ def render(points: PointDict, flipy=False, render_function=None):
         yrange = range(ymax, ymin-1, -1)
     else:
         yrange = range(ymin, ymax+1)
-    image = '\n'.join(''.join(render_function((i,j), points) for i in range(xmin, xmax+1)) for j in yrange)
+    image = '\n'.join(''.join(rf((i,j), points) for i in range(xmin, xmax+1)) for j in yrange)
     return image
