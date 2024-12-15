@@ -20,6 +20,20 @@ def store_nested_dict(dictionary, value, *keys):
     val[keys[-1]] = value
     return dictionary
 
+def put_result_in_nested_dict(dictionary, result, *keys):
+    val = dictionary
+    for key in keys:
+        try:
+            val = val[key]
+        except KeyError as e:
+            val[key] = {}
+            val = val[key]
+    if result in val:
+        val[result] += 1
+    else:
+        val[result] = 1
+    return dictionary
+
 def generate_readme():
     path = os.path.join(ROOT_DIR, 'README.md')
     readme_file = os.path.abspath(path)
@@ -51,19 +65,19 @@ def generate_readme():
 def get_module_time_path():
     return os.path.join(ROOT_DIR, 'times.pickle')
 
-def load_module_times() -> Dict:
+def load_module_times() -> tuple[Dict, Dict]:
     path = get_module_time_path()
     try:
         with open(path, 'rb') as f:
-            times = pickle.loads(f.read())
-        return times
+            loaded = pickle.loads(f.read())
+        return loaded['times'], loaded['results']
     except (EOFError, FileNotFoundError) as e:
-        return {}
+        return {'times': {}, 'output': {}}
 
-def store_module_times(times):
+def store_module_times(times, results):
     path = get_module_time_path()
     with open(path, 'wb') as f:
-        f.write(pickle.dumps(times))
+        f.write(pickle.dumps({'times':times, 'results': results}))
 
 def _replace_between_tags(readme: str, content: str, start: str, end: str) -> str:
     content = '\n'.join([start, content, end])
@@ -109,16 +123,18 @@ def _create_completed_text() -> str:
     return '\n'.join(text)
 
 def append_new_run_times(ret1, time1, ret2, time2, day, year):
-    times = load_module_times()
+    times, results = load_module_times()
     changed=False
     if ret1:
         store_nested_dict(times, time1, year, day, 1)
+        put_result_in_nested_dict(results, ret1, year, day, 1)
         changed=True
     if ret2:
         store_nested_dict(times, time2, year, day, 2)
+        put_result_in_nested_dict(results, ret1, year, day, 1)
         changed=True
     if changed:
-        store_module_times(times)
+        store_module_times(times, results)
 
 def get_full_year_paths() -> List[str]:
     """
@@ -170,7 +186,7 @@ def time_module(module, year, day):
 
 def _find_completed_days(rerun=None):
     items = {}
-    saved_times = load_module_times()
+    saved_times, results = load_module_times()
     changed = False
     for year_path in get_full_year_paths():
         # print(f'{year_path}: ',end="")
@@ -204,5 +220,5 @@ def _find_completed_days(rerun=None):
             if p2:
                 items[year][day][2] = p2
     if changed:
-        store_module_times(items)
+        store_module_times(items, results)
     return items

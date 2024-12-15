@@ -8,7 +8,7 @@ from framework.make_readme import (append_new_run_times, _create_completed_text,
 from framework.console import console
 from config import ROOT_DIR
 
-def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: int):
+def run_day(year, day, test=False, verbose=False, save_results=True):#module: str, year: int, day: int):
     """
     Runs given days solution
     """
@@ -44,7 +44,7 @@ def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: 
     except AttributeError as e:
         raise e
 
-    if not test:
+    if not test and save_results:
         append_new_run_times(r1,p1,r2,p2,day,year)
         # print(_create_completed_text())
 
@@ -54,7 +54,7 @@ def run_day(year, day, test=False, verbose=False):#module: str, year: int, day: 
         # I can't be bothered fixing this right now.
 
 def run():
-    year, day, test, verbose = _parse_args(sys.argv[1:])
+    year, day, test, verbose, save_results = _parse_args(sys.argv[1:])
     if year == ".":
         resp = console.input("[yellow]You have requested to run every problem. This could take some time. Continue? [[green]Y[/green]/n]: [/yellow]")
         if resp in ["n", "N"]:
@@ -70,7 +70,7 @@ def run():
         for day_path in day_paths:
             year, day = get_year_and_day_from_day_path(day_path)
             #console.print(f"Attempting to run problem {year}-{day}")
-            run_day(year, day, verbose=verbose)
+            run_day(year, day, verbose=verbose)#, save_results=save_results)
         return
 
     if day is not None:
@@ -128,8 +128,9 @@ def _parse_args(args: List[str]) -> Tuple[int, int]:
     parser.add_argument('day', type=opt_int, help='The day of the exercise', )
     parser.add_argument('-t', '--test', action='store_true')
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-s', '--save', action='store_true')
     parsed = parser.parse_intermixed_args(args)
-    return parsed.year, parsed.day, parsed.test, parsed.verbose#, parsed.quiet
+    return parsed.year, parsed.day, parsed.test, parsed.verbose, parsed.save#, parsed.quiet
 
 if __name__=="__main__":
     run()

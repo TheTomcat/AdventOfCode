@@ -65,3 +65,14 @@ def read_entire_input(year: int, day: int) -> List[str]:
     with open(problem_path, 'r') as f:
         data = f.read().splitlines()
         return data
+    
+def read_entire_input_str(year: int, day: int) -> str:
+    """Reads the file corresponding to the problem specified. If it does not exist, attempt to download it.
+    Output is a string containing the whole input.
+    """
+    problem_path = _build_problem_path(year, day)
+    if not os.path.exists(problem_path):
+        get_input(year, day)
+    with open(problem_path, 'r') as f:
+        data = f.read()
+        return data

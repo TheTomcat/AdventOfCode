@@ -8,6 +8,7 @@ from functools import wraps
 from config import RUNNING_ALL
 from framework.console import console
 from framework.exceptions import SolutionNotFoundException
+from framework.make_readme import load_module_times, put_result_in_nested_dict
 
 
 # def _get_year_from_segment(segment: str) -> int:
@@ -57,7 +58,16 @@ def solution_timer(year: int, day: int, part: int, version: str = ''):  # noqa: 
                     raise SolutionNotFoundException(year, day, part)
 
                 diff = (time.perf_counter() - start) * 1000
+                times, results = load_module_times()
+
+                ## New Solution Identifier - not working :(
+                # put_result_in_nested_dict(results, solution, year, day, part)
+                # solution_description = ''
+                # if results[year][day][part][solution] == 1:
+                #     solution_description = f' - [red]New Solution[/red]'
+                # console.print(f'{prefix}{solution} in {diff:.2f} ms{solution_description}')
                 console.print(f'{prefix}{solution} in {diff:.2f} ms')
+                
             except SolutionNotFoundException:
                 console.print(f'{prefix}[red]solution not found[/red]')
             except (ValueError, ArithmeticError, TypeError):
