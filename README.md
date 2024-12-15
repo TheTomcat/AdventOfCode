@@ -1,5 +1,5 @@
 # Advent of Code ⭐️
-[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=187&color=yellow)]()
+[![Stars collected](https://shields.io/static/v1?label=stars%20collected&message=214&color=yellow)]()
 <!--[![codecov](https://codecov.io/gh/marcelblijleven/adventofcode/branch/master/graph/badge.svg?token=jZ2TgfyltM)](https://codecov.io/gh/marcelblijleven/adventofcode)
 [![tests](https://github.com/marcelblijleven/adventofcode/actions/workflows/tests.yaml/badge.svg)](https://github.com/marcelblijleven/adventofcode)
 [![version](https://img.shields.io/github/v/release/marcelblijleven/adventofcode.svg)](https://github.com/marcelblijleven/adventofcode/releases)
@@ -7,11 +7,58 @@
 My advent of code repository. Template and structure of the repository is based off the amazing work of [Marcel Blijleven](https://github.com/marcelblijleven) but the solutions are my own. Working on understanding all of the features of the original repository, but this serves as a simple summary. 
 
 <!-- Last updated -->
-Last updated 18:28 on Thursday 29 December, 2022
+Last updated 19:39 on Friday 13 December, 2024
 <!-- End last updated -->
 
 <!-- start completed section -->
 ## Completed ⭐️
+
+### 2024
+
+- day 01: ⭐️ ⭐️
+  - part one: 0.652ms
+  - part two: 0.800ms
+- day 02: ⭐️ ⭐️
+  - part one: 3.329ms
+  - part two: 13.360ms
+- day 03: ⭐️ ⭐️
+  - part one: 0.446ms
+  - part two: 0.756ms
+- day 04: ⭐️ ⭐️
+  - part one: 10.074ms
+  - part two: 4.315ms
+- day 05: ⭐️ ⭐️
+  - part one: 6.537ms
+  - part two: 7.849ms
+- day 06: ⭐️ ⭐️
+  - part one: 4.622ms
+  - part two: 49446.263ms
+- day 07: ⭐️ ⭐️
+  - part one: 59.065ms
+  - part two: 117.833ms
+- day 08: ⭐️ ⭐️
+  - part one: 0.819ms
+  - part two: 2.512ms
+- day 09: ⭐️ ⭐️
+  - part one: 18.950ms
+  - part two: 14162.275ms
+
+### 2023
+
+- day 01: ⭐️ ⭐️
+  - part one: 1.378ms
+  - part two: 16.840ms
+- day 02: ⭐️ ⭐️
+  - part one: 0.686ms
+  - part two: 1.210ms
+- day 03: ⭐️ ⭐️
+  - part one: 7.961ms
+  - part two: 6.081ms
+- day 04: ⭐️ ⭐️
+  - part one: 1.209ms
+  - part two: 61.137ms
+- day 05: ⭐️  - 
+  - part one: 1.584ms
 
 ### 2022
 

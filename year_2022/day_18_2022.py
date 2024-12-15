@@ -63,7 +63,7 @@ def part_two(data: List[str], verbose=False):
     start = (bbox[0][0]-1, bbox[1][0]-1, bbox[2][0]-1)
     in_range = lambda x,y,z: bbox[0][0]-1 <= x <= bbox[0][1]+1 and bbox[1][0]-1 <= y <= bbox[1][1]+1 and bbox[2][0]-1 <= z <= bbox[2][1]+1
     adj = lambda p: (((p[0]+dx,p[1]+dy,p[2]+dz),0 )for dx,dy,dz in [(1,0,0),(-1,0,0),(0,1,0),(0,-1,0),(0,0,1),(0,0,-1)] if (p[0]+dx,p[1]+dy,p[2]+dz) not in obsidian and in_range(p[0]+dx, p[1]+dy, p[2]+dz))
-    BFS = search(start, adj)
+    BFS, _ = search(start, adj)
     for x,y,z in obsidian:      
         for dx,dy,dz in [(1,0,0),(-1,0,0),(0,1,0),(0,-1,0),(0,0,1),(0,0,-1)]:
             if (x+dx, y+dy, z+dz) not in obsidian and (x+dx, y+dy, z+dz) in BFS:

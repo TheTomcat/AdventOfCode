@@ -55,7 +55,7 @@ def build_paths(adjacency):
     paths = {}
     for start in adjacency:
         paths[start] = {}
-        dfs = search(start, lambda position: ((neighb, 1) for neighb in adjacency[position]))
+        dfs, _ = search(start, lambda position: ((neighb, 1) for neighb in adjacency[position]))
         for end in adjacency:
             paths[start][end] = construct_path(dfs, end, weighted=False)
     return paths

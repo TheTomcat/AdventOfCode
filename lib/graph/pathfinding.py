@@ -21,7 +21,7 @@ def search(start, neighbours: Neighbour, end: EndCondition=None, depth_first=Fal
         depth_first (bool, optional): Perform a depth_first search. Defaults to False.
 
     Returns:
-        Dict[Node: {'parent':Node, 'weight':float, 'depth':int}]
+        visited_from: Dict[Node: {'parent':Node, 'weight':float, 'depth':int}]
             A visited_from dictionary of (key,val) pairs where d[node_a]=NodeData(node_b) means that node_a arrived via node_b. `None` represents the starting node.
         end: The end node, if `end` is specified
     """
@@ -46,7 +46,7 @@ def search(start, neighbours: Neighbour, end: EndCondition=None, depth_first=Fal
             if end(neighbour):
                 #print(" - End condition satisfied, halting!")
                 return visited_from, neighbour
-    return visited_from
+    return visited_from, None
 
 def A_star(start: Node, end: Node, neighbours: Neighbour, heuristic: Optional[Heuristic]=None, draw=None):
     """Priority-search. Perform an A-star or Dijkstra search on the graph. If heuristic is not provided, will perform standard
