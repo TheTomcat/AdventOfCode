@@ -11,8 +11,8 @@ import os
 import glob
 
 from framework.console import console
-from config import ROOT_DIR, TEMPLATE_PATH
-from framework.exceptions import ModuleVersionAlreadyOKError, ModuleVersionError, SolutionFileAlreadyExistsError
+from config import ROOT_DIR, STORAGE_OBJ_PATH, TEMPLATE_PATH
+from framework.exceptions import DataNotFoundError, InvalidDayError, InvalidPartError, ModuleVersionAlreadyOKError, ModuleVersionError, SolutionFileAlreadyExistsError, UnraisableError
 
 app = typer.Typer()
 
@@ -76,45 +76,159 @@ def create_day(year: Annotated[int, typer.Argument(help="The year to create")],
     
 @app.command()
 def run(year: Annotated[int, typer.Argument(help="The year to run")], 
-        day: Annotated[int, typer.Argument(help="The day to run")], 
+        day: Annotated[int, typer.Argument(help="The day to run")] = None, 
         part: Annotated[int, typer.Option(help="The part to run. Omit or set as 0 to run both parts")] = 0, 
         version: Annotated[str, typer.Option(help="The version to run.")] = None,
         verbose: Annotated[bool, typer.Option("--verbose", "-v", help="Verbose output")] = False,
         test: Annotated[bool, typer.Option("--test","-t", help="Use test data rather than the full input.")] = False,
+        error: Annotated[bool, typer.Option("--suppress-errror", "-e", help="Suppress error messages")] = False
         # log_results: bool = False
         ):
-    part = None if part == 0 else part
-    try:
-        results = time_solution(year, day, part=part, version=version, as_test=test, verbose=verbose)
-    except ModuleVersionError:
-        console.print("""[red]Cannot run a version 1 problem in the version 2 solver. Either use the version 1 solver, or modify the solution file by:
-   1. Removing or commenting out the @solution_timer() decorators from each 'part' function
-   2. Adding '__version__ = 2' to the top of the file.[/red]""")
-        raise typer.Exit()
-    except FileNotFoundError:
-        console.print(f"[red]There was no solution found for problem {day} from {year}[/red]")
-        console.print(f"[yellow]Attempting to create template solution...[/yellow]")
-        _create_day(year, day)
-        return
+    # part = None if part == 0 else part
+    parts = [1,2] if part == 0 else [part]
+    days = get_all_days(year) if day is None else [day]
+#     try:
+#         results = time_solution(year, day, part=part, version=version, as_test=test, verbose=verbose)
+#     except ModuleVersionError:
+#         console.print("""[red]Cannot run a version 1 problem in the version 2 solver. Either use the version 1 solver, or modify the solution file by:
+#    1. Removing or commenting out the @solution_timer() decorators from each 'part' function
+#    2. Adding '__version__ = 2' to the top of the file.[/red]""")
+#         raise typer.Exit()
+#     except FileNotFoundError:
+#         console.print(f"[red]There was no solution found for problem {day} from {year}[/red]")
+#         console.print(f"[yellow]Attempting to create template solution...[/yellow]")
+#         _create_day(year, day)
+#         raise typer.Exit()
     
     with storage_obj() as obj:
-        for part, (solution, time) in enumerate(results):
-            prefix = _get_prefix(year, day, part+1, version)
-            if not solution:
-                console.print(f'{prefix}No solution found.')
-                continue
-            result_count = check_result(obj, solution, year, day, part, test)
-            disp = f" - [red]New Solution![/red]" if not result_count else f" - Solution obtained {result_count} time(s) before"
-            console.print(f'{prefix}{solution} in {time:.2f} ms{disp}')
-            store_time(obj, time, year, day, part, version)
+        # for part, (solution, time) in enumerate(results):
+        for day in days:
+            for part in parts:
+                prefix = _get_prefix(year, day, part, version)
+                console.print(f"{prefix}", end="")
+                errorcatch = Exception if error else UnraisableError
+                try:
+                    solution, runtime = time_solution_part(year, day, part=part, version=version, as_test=test, verbose=verbose)
+                except ModuleVersionError:
+                    console.print("[red]Cannot run a version 1 problem in the version 2 solver. Either use the version 1 solver, or modify the solution file by:\n" + 
+                                "1. Removing or commenting out the @solution_timer() decorators from each 'part' function\n" +
+                                "2. Adding '__version__ = 2' to the top of the file.[/red]")
+                    raise typer.Exit()
+                except FileNotFoundError:
+                    console.print(f"[red]There was no solution found for problem {day} from {year}[/red]")
+                    console.print(f"[yellow]Attempting to create template solution...[/yellow]")
+                    _create_day(year, day)
+                    raise typer.Exit()
+                except DataNotFoundError:
+                    console.print(f"[red]Unable to load {'test ' if test else '' }data from file.[/red]")
+                    raise typer.Exit()
+                except KeyboardInterrupt:
+                    cmd = console.input("[red]Halted[/red] - [yellow][A]bort test run, [S]kip this file: [/yellow]")
+                    if cmd in ['A','a', '']:
+                        console.print("[red]   Aborting.[/red]")
+                        raise typer.Exit()
+                    # console.print("[purple] Skipping file[/purple]")
+                    continue
+                except errorcatch as e:
+                    console.print(f"[red]Error! Run without -e flag for details[/red]")
+                    raise typer.Exit()
+
+                
+                if not solution:
+                    console.print(f'No solution found.')
+                    continue
+                result_count = check_result(obj, solution, year, day, part, test)
+                disp = f" - [red]New Solution![/red]" if not result_count else f" - Solution obtained {result_count} time(s) before"
+                console.print(f'{solution} in {runtime:.2f} ms{disp}', end="")
+                store_time(obj, runtime, year, day, part, version)
+                if test:
+                    console.print("")
+                elif not has_star(obj, year, day, part):
+                    to_star = console.input(" [yellow]Add a :star:? [/yellow]")
+                    if to_star in ['Y','y']:
+                        add_star(obj, year, day, part)
+                else:
+                    console.print(" :star:")
     # log_results(year, day, results)
 
 @app.command()
+def star(year: Annotated[int, typer.Argument(help="The year to star")], 
+        day: Annotated[int, typer.Argument(help="The day to star")], 
+        part: Annotated[int, typer.Option(help="The part to star. Omit or set as 0 to star both parts")] = 0,
+        unstar: Annotated[bool, typer.Option("--unstar", "-u", help="Flag to remove star instead")] = False
+        ):
+    if part == 0:
+        parts = [1,2]
+    elif part == 1 or part == 2:
+        parts = [part]
+    else:
+        console.print(f"[red]Invalid part {part}. Must be 0, 1 or 2. 0 for both parts 1 and 2[/red]")
+        raise typer.Exit()
+    with storage_obj() as obj:
+        for part in parts:
+            if unstar:
+                console.print(f"   [red]Removing :star: from {year}-{day} part {part}[/red]")
+                remove_star(obj, year, day, part)
+            else:
+                console.print(f"   [green]Adding :star: to {year}-{day} part {part}![/green]")
+                add_star(obj, year, day, part)
+
+@app.command()
+def clear_results(year: Annotated[int, typer.Argument(help="The year to reset the results")], 
+                  day: Annotated[int, typer.Argument(help="The day to reset the results")], 
+                  part: Annotated[int, typer.Argument(help="The part to reset the results")],
+                  test: Annotated[bool, typer.Option("--test","-t",help="Clear test results")] = False,
+                  unstar: Annotated[bool, typer.Option("--unstar", "-u", help="Also unstar the problem")] = False):
+    with storage_obj() as obj:
+        reset_result(obj, year, day, part, test)
+        msg = ""
+        if unstar:
+            remove_star(obj, year, day, part)
+            msg = " [red]Star Removed. [/red]"
+        console.print(f"[yellow]Resetting reuslt array for {year=} {day=} {part=} {'(test)' if test else ''}[/yellow]{msg}")
+        
+    
+
+@app.command()
+def status(year: Annotated[int, typer.Argument(help="The year to star")] = None, 
+        day: Annotated[int, typer.Argument(help="The day to star")] = None, 
+        part: Annotated[int, typer.Argument(help="The part to star. Omit or set as 0 to star both parts")] = 0):
+    
+    years = get_all_years() if year is None else [year]
+    day_input = day
+    part_input = part
+    with storage_obj() as obj:
+        # print(years)
+        for year in years:
+            console.print(f"Year {year}")
+            days = get_all_days(year) if day_input is None else [day_input]
+            for day in days:
+                stars_got = has_star(obj, year, day, 1) + has_star(obj, year, day, 2)
+                if stars_got == 0: # No stars got, but solution file exists
+                    output = f"   - Day {day:02} - -"
+                    part_one_time = f'\n     - part one: No solution'
+                    part_two_time = f'\n     - part two: No solution'
+                if stars_got >= 1: # Correct solution for 1 but not yet for 2
+                    output  = f"   - Day {day:02} :star2: -"
+                    part_one_time = f'\n     - part one: {fetch_time(obj, year, day, 1):.3f}ms' if has_star(obj, year, day, 1) else ""
+                    part_two_time = f'\n     - part two: No solution'
+                if stars_got == 2: # All solutions
+                    output  = f"   - Day {day:02} :star2: :star2:"
+                    part_two_time = f'\n     - part two: {fetch_time(obj, year, day, 2):.3f}ms' if has_star(obj, year, day, 2) else ""
+
+                # parts = [1,2] if part_input == 0 else [part_input]
+                # stars = " ".join(":star2:" if has_star(obj, year, day, part) else " " for part in parts)
+                # for part in parts:
+                # console.print(f"   - Day {day:02} {stars}{part_one_time}{part_two_time}")
+                console.print(f'{output}{part_one_time}{part_two_time}')
+            
+
+@app.command()
 def convert(year: Annotated[int, typer.Argument(help="The year to convert")], 
-        day: Annotated[int, typer.Argument(help="The day to convert. Put year as 0 to convert all.")], 
+        day: Annotated[int, typer.Argument(help="The day to convert. Put year as 0 to convert all.")] = None, 
         version: Annotated[str, typer.Option(help="The version to convert.")] = None,
         overwrite: Annotated[bool, typer.Option(help="Overwrite the old version file")] = False):
-    if day == 0:
+    if day is None:
         days = get_all_days(year)
         prompt = console.input(f"Batch convert all {len(days)} solution files for year {year} to version 2 (y/[bold]N[/bold])?")
         if prompt not in ['Y','y']:
@@ -168,6 +282,8 @@ def _convert(from_path: str, to_path: str) -> bool:
 
 def _create_day(year: int, day: int, version: Optional[str] = None):
     # console.print(f"[yellow]  Creating the solution file for {year=} day {day=}.")
+    if not 0 < day < 25:
+        raise InvalidDayError("Day must be between 1 and 25")
     year_path = build_year_path(year)
     day_path = build_day_path(year, day, version)
     # does the year folder exist?
@@ -283,12 +399,12 @@ def get_identifiers_from_path(day_path: str) -> tuple[int,int,int]:
 Result = int
 Version = str
 class StorageObj(TypedDict):
-    results: dict[tuple[int,int,int], list[Result]]
+    results: dict[tuple[int,int,int,int], dict[Result, int]]
     times: dict[tuple[int,int,int,Version], int]
     stars: set[tuple[int,int,int]]
 
 def get_module_storage_path():
-    return os.path.join(ROOT_DIR, 'db.pickle')
+    return STORAGE_OBJ_PATH # os.path.join(ROOT_DIR, 'db.pickle')
 
 def get_module_storage() -> StorageObj:
     try:
@@ -311,6 +427,8 @@ def add_star(obj: StorageObj, year: int, day: int, part: int):
     obj['stars'].add((year,day,part))
 def remove_star(obj:StorageObj, year: int, day: int, part: int):
     obj['stars'].remove((year, day, part))
+def has_star(obj: StorageObj, year: int, day: int, part: int) -> bool:
+    return (year, day, part) in obj['stars']
 
 def store_time(obj: StorageObj, time: float, year: int, day: int, part: int, version: Version = None):
     if version:
@@ -318,6 +436,13 @@ def store_time(obj: StorageObj, time: float, year: int, day: int, part: int, ver
     else:
         p = (year, day, part)
     obj['times'][p] = time
+
+def fetch_time(obj: StorageObj, year: int, day: int, part: int, version: Version = None) -> float:
+    if version:
+        p = (year, day, part, version)
+    else:
+        p = (year, day, part)
+    return obj['times'][p]
 
 @contextmanager
 def storage_obj():
@@ -327,11 +452,6 @@ def storage_obj():
     finally:
         save_module_storage(obj)
         
-# def log_results(year: int, day: int, results: tuple):
-#     with storage_obj() as obj:
-#         check_result(obj, resu)
-#         print(obj)
-
 def check_result(obj: StorageObj, result: Result, year: int, day: int, part: int, test: bool) -> int:
     "Check to see if a solution has been obtained before. Return the number of times it has happened (not including this one)"
     iden = (year, day, part, test)
@@ -345,6 +465,12 @@ def check_result(obj: StorageObj, result: Result, year: int, day: int, part: int
     else:
         obj['results'][iden] = {result:1}
         return obj['results'][iden][result] - 1
+    
+def reset_result(obj: StorageObj, year: int, day: int, part: int, test: int):
+    iden = (year, day, part, test)
+    if iden in obj['results']:
+        obj['results'][iden] = {}
+
 
 ##################################
 
@@ -391,7 +517,37 @@ def time_solution(year: int, day: int, *,version:Optional[Version]=None, part: O
             p2 = None
             diff2 = None
     return (p1, diff1), (p2, diff2)
+
+def time_solution_part(year: int, day: int, part: int, *,version:Optional[Version]=None, as_test: Optional[bool] = False, verbose: bool = False):
+    module = load_module(year, day, version)
+    try:
+        if module.__version__ != 2:
+            raise ModuleVersionError()
+    except AttributeError:
+        raise ModuleVersionError()
+    try:
+        if as_test:
+            data = module.test
+        else:
+            data = module.data
+    except AttributeError:
+        raise DataNotFoundError(as_test)
     
+    if part != 1 and part != 2:
+        raise InvalidPartError(part)
+    try:
+        start = time.perf_counter()
+        if part == 1:
+            result = module.part_one(data, verbose=verbose)
+        elif part == 2:
+            result = module.part_two(data, verbose=verbose)
+        end = time.perf_counter()
+        runtime = (end-start)*1000
+    except AttributeError:
+        result = None
+        runtime = None
+    
+    return result, runtime
     
 if __name__ == "__main__":
     # typer.run(run)

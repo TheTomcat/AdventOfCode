@@ -16,3 +16,19 @@ class ModuleVersionError(Exception):
 class ModuleVersionAlreadyOKError(Exception):
     def __init__(self, version):
         super().__init__(f"The solution file appears to already be version {version}")
+
+class InvalidPartError(Exception):
+    def __init__(self, part):
+        super().__init__(f"There is no part {part}. Part must be 1 or 2")
+
+class InvalidDayError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+
+class DataNotFoundError(Exception):
+    def __init__(self, test_data):
+        super().__init__(f"Unable to load {'test ' if test_data else '' }data from file.")
+
+class UnraisableError(Exception):
+    def __init__(self):
+        super().__init__("Unraisable error")
