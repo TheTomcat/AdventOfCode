@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,python
 
 .session
+inputs/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
