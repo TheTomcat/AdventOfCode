@@ -19,12 +19,13 @@ def parse(data: List[str]) -> Filesystem:
     return filesystem
 
 def iterate_in_reverse_without_blanks(filesystem: Filesystem):
+    "Yield a bitstring of ids starting from the end of the file working backwards"
     for id, filesize, blanksize in reversed(filesystem):
         for _ in range(filesize):
             yield id
 
 def write_filesystem_fragmented(filesystem: Filesystem) -> List[int]:
-
+    "Write the filesystem to disk using the part one implementation"
     used_space = sum(a for _,a,_ in filesystem)
 
     disk = [None] * used_space
@@ -56,6 +57,7 @@ def part_one(data: List[str], verbose=False):
     return compute_checksum(disk)
 
 def normalise(filesystem: Filesystem):
+    "Get a list of the blank spaces, of the form [start_index, blank_length]"
     blank_spaces = [] # start, length
     pointer = 0
     for id, file, blank in filesystem:
@@ -70,6 +72,7 @@ def normalise(filesystem: Filesystem):
     return blank_spaces
 
 def naive_filesystem(filesystem: Filesystem):
+    "The filesystem as a list of ids. '.' represents an empty space"
     filesystem_size = sum(a+b for _,a,b in filesystem)
     disk = ['.'] * filesystem_size
     pointer = 0
@@ -78,31 +81,7 @@ def naive_filesystem(filesystem: Filesystem):
         pointer += filesize + blanksize
     return disk
 
-def debug_normalise_disk(disk: List[int]):
-    blank_spaces = []
-    # pointer = 0
-    length = 0
-    for start, v in enumerate(disk):
-        if v != '.':
-            if length > 0:
-                blank_spaces.append([start-length, length])
-            length = 0
-        else:
-            length += 1
-    if length > 0:
-        blank_spaces.append([start-length+1, length])
-    return blank_spaces
 
-def tidy_blank_spaces(blank_spaces):
-    new_blank_spaces = []
-    for (a,b),(c,d) in window(blank_spaces):
-        if a+b == c:
-            new_blank_spaces.append([a, b+d])
-        else:
-            new_blank_spaces.append([a,b])
-    new_blank_spaces.append(blank_spaces[-1])
-    return new_blank_spaces
-        
 
 def write_filesystem_unfragmented(filesystem: Filesystem, verbose: bool = False) -> List[int]:
     blank_spaces = normalise(filesystem)
@@ -110,92 +89,33 @@ def write_filesystem_unfragmented(filesystem: Filesystem, verbose: bool = False)
     filesystem_size = sum(a+b for _,a,b in filesystem)
     #disk = ['.'] * filesystem_size
     disk = naive_filesystem(filesystem)
-    written = set()
     end_pointer = filesystem_size
     forward_pointer = 0
     
-    for id, filesize, blanksize in reversed(filesystem):
-        
-        # find a space
+    for id, filesize, blanksize in reversed(filesystem): 
+        # Starting from the last file in the group, find the first blank space that fits the file
+        end_pointer -= (filesize + blanksize) # This is effectively the new EOF
         for index, (start, blank_length) in enumerate(blank_spaces):
-
-            if filesize <= blank_length:
+            
+            if filesize <= blank_length and start < end_pointer: # We've found the first space that is suitable
                 if verbose: 
                     print(f"Found a blank at {start} of length {blank_length} to fit file {id=}")
-                # write the file into this blank
+                    print(f"   Overwriting {disk[start:start+filesize]} with {[id]*filesize}")
+                #assert disk[start:start+filesize] == ['.'] * filesize
+                disk[start:start+filesize] = [id] * filesize # Store the file 'id' on the disk
                 if verbose:
-                    print(f"Overwriting {disk[start:start+filesize]} with {[id]*filesize}")
-                assert disk[start:start+filesize] == ['.'] * filesize
-                disk[start:start+filesize] = [id] * filesize
-                end_pointer -= (filesize + blanksize)
-                if verbose:
-                    print(f"Removing {id=} from position {end_pointer=}")
-                assert disk[end_pointer:end_pointer+filesize] == [id] * filesize
-                disk[end_pointer:end_pointer+filesize] = ['.'] * filesize
-                written.add(id)
-                # update the end_pointer
+                    print(f"   Removing {id=} {filesize=} from position {end_pointer=}")
+                    print(f"   {disk[end_pointer:end_pointer+filesize]}")
+                # assert disk[end_pointer:end_pointer+filesize] == [id] * filesize
+                disk[end_pointer:end_pointer+filesize] = ['.'] * filesize # Remove 'id' from its original position
+
+
                 # update the blank index for the overwritten blanks
-                if blank_length - filesize == 0:
+                if blank_length - filesize == 0: # If we've perfectly filled the void, remove this blank space
                     blank_spaces.pop(index)
-                else:
+                else: # Otherwise, update the pointer to account for [newfile......]
                     blank_spaces[index] = [start + filesize, blank_length-filesize]
-
-                if True:
-                    blank_spaces = tidy_blank_spaces(blank_spaces)
-                if False: # We update now the original blank index and merge any touching sections
-
-                    # Update the blank index for the source
-                    new_blank = [end_pointer, filesize]
-                    blank_spaces.append(new_blank)
-                    blank_spaces.sort() # Ideally this would be just inserted in the right place.
-                    new_index = blank_spaces.index(new_blank)
-
-
-                    a,b = blank_spaces[new_index-1]
-                    c,d = [-1,-1] if new_index+1 >= len(blank_spaces) else blank_spaces[new_index+1] #else -1,-1
-
-                    touches_before = 0
-
-                    print(f"Examining {blank_spaces[new_index-1:new_index+2]}", end="")
-                    if a+b == end_pointer and end_pointer+filesize == c:
-                        print("<>")
-                        blank_spaces[new_index-1:new_index+2] = [[a,b+filesize+d]]
-                        new_index-=1
-                    elif a+b == end_pointer:
-                        print("<")
-                        blank_spaces.pop(new_index-1)
-                        new_index-=1
-                        blank_spaces[new_index] = [a, filesize+b]
-                    elif end_pointer+filesize == c:
-                        print(">")
-                        blank_spaces.pop(new_index+1)
-                        blank_spaces[new_index][1] += filesize
-                    else:
-                        print("")
-
                 break
-        else:
-        #     # write the file to its actual location
-        #     # which is equal to the total disk size minus files minus blanks already parsed
-            end_pointer -= (filesize + blanksize)
-            if verbose:
-                print(f"No blanks greater than {filesize} found, writing {id} to {end_pointer}")
-            assert disk[end_pointer:end_pointer+filesize] == [id] * filesize 
-            disk[end_pointer:end_pointer+filesize] = [id]*filesize
-        #     # written.add(id)
-        if verbose:
-            if len(disk) > 50:
-                x = input()
-                if x == "a":
-                    print(f"{','.join(f'{a}' for a in disk)}")
-                if x == "s":
-                    print(f"{','.join(f'{a}' for a in disk[:40])}")
-            else:
-                print(f"{''.join(f'{a}' for a in disk)}")
-        # print(blank_spaces)
-        # print(debug_normalise_disk(disk))
-        # print(disk)
-        # assert blank_spaces == debug_normalise_disk(disk)
     return disk
 
 
